@@ -1,0 +1,25 @@
+.nfc-image{
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  animation: blink 2s;
+  animation-iteration-count: infinite;
+}
+
+.nfc-success-image{
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
+@keyframes blink {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

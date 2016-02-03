@@ -1,0 +1,23 @@
+<ion-navbar *navbar hideBackButton class="show-navbar android-attr" padding>
+    <button menuToggle>
+        <ion-icon name='menu'></ion-icon>
+    </button>
+    <ion-title>Nfc Tag Reader</ion-title>
+</ion-navbar>
+<ion-content padding class="has-header">
+    <img src="img/nfc.png" class="nfc-image" alt="" [hidden]="dataReceived">
+    <img src="img/nfc_success.png" class="nfc-success-image" alt="" [hidden]="!dataReceived">
+    <div [hidden]="dataReceived">Listening for tags...</div>
+    <div [hidden]="!dataReceived">New tag detected !</div>
+    <ion-row center [hidden]="!dataReceived">
+        <ion-col><strong>Tag key</strong></ion-col>
+        <ion-col><strong>Tag value</strong></ion-col>
+    </ion-row>
+    <ion-row center *ngFor='#tagInfo of tagInfos' [hidden]="!dataReceived">
+        <ion-col>{{tagInfo.key}}</ion-col>
+        <ion-col>{{tagInfo.value}}</ion-col>
+    </ion-row>
+    <div padding>
+        <button block type="button" (click)="scanNewTag()" [hidden]="!dataReceived">Scan new tag</button>
+    </div>
+</ion-content>
