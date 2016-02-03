@@ -1,4 +1,4 @@
-IONIC 2 App base
+CROSS PLATFORM NFC
 ==========
 
 # Presentation
@@ -55,4 +55,3 @@ the android preference: android-minSdkVersion
     - In the "Command line options" input, set this value: "--module "commonjs" --experimentalDecorators"
     - Click "Apply" then "OK"
 - The TypeScript compiler should be set correctly.
-
