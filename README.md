@@ -1,10 +1,28 @@
 CROSS PLATFORM NFC
 ==========
 
+# Structure
+- Angular v2.0.0-beta.3
+- Ionic Framework v2.0.0-alpha.54
+- ZoneJS v0.5.11
+
+# Installed cordova plugins
+- cordova-plugin-barcodescanner
+- cordova-plugin-keyboard
+- cordova-plugin-statusbar
+- cordova-plugin-vibration
+- phonegap-nfc
+- cordova-plugin-whitelist
+
 # Presentation
 A starting project for ionic2 based on TypeScript
 
 # Installation
+You need to install tsd (Type Script Definition Manager) required by zonejs in administrator mode:
+```bash
+$ npm install -g tsd
+```
+
 First you need to install the ionic command in version 2:
 ```bash
 $ npm install -g ionic@beta
@@ -27,10 +45,23 @@ For starting the project on desktop:
 $ ionic serve
 ```
 
+# Install cordova command
+```bash
+$ npm install -g cordova
+```
+
+# Install a new plugin
+Always use cordova (not phonegap) to add a new plugin
+```bash
+$ cordova plugin add cordova-plugin-barcodescanner
+```
+Edit the config.xml file and add a new entry:
+<gap:plugin name="cordova-plugin-barcodescanner" source="npm" />
+
 # Execution on real Android device
 - First you need to retrieve the android sdk, then run the android SDK manager and download the last android version
 - Then you need to configure the ANDROID_HOME environment variable based on the location of your Android SDK folder.
-- You have to add the android platform in ionic:
+- You have to add the android platform in ionic
 ```bash
 $ ionic platform add android
 ```

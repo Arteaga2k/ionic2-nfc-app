@@ -29,7 +29,8 @@ var NFCPage = (function () {
     }
     NFCPage.prototype.addNfcListeners = function () {
         var self = this;
-        nfc.addTagDiscoveredListener(function (tagEvent) {
+        nfc.addTagDiscoveredListener(function (tagEvent, data) {
+            console.log(tagEvent, data);
             self.zone.run(function () {
                 self.readTagData(tagEvent);
             });
@@ -43,6 +44,7 @@ var NFCPage = (function () {
             data.push({ key: key, value: tagEvent.tag[key] });
         });
         console.log(data);
+        this.tag = tagEvent.tag;
         this.tagInfos = data;
         this.dataReceived = true;
         this.vibrate(2000);
@@ -54,6 +56,25 @@ var NFCPage = (function () {
     };
     NFCPage.prototype.scanNewTag = function () {
         this.dataReceived = false;
+    };
+    NFCPage.prototype.saveTag = function () {
+        var _this = this;
+        if (this.tag.id) {
+            if (!localStorage.getItem('NFC-APP-TAGS')) {
+                localStorage.setItem('NFC-APP-TAGS', JSON.stringify([]));
+            }
+            var tags = JSON.parse(localStorage.getItem('NFC-APP-TAGS'));
+            tags = tags.filter(function (item) { return item.id === _this.tag.id; });
+            this.tag.date = new Date().toISOString();
+            tags.push(this.tag);
+            localStorage.setItem('NFC-APP-TAGS', JSON.stringify(tags));
+            var alert_1 = ionic_1.Alert.create({
+                title: 'Tag saved',
+                subTitle: "Tag '" + this.tag.id + "' saved!",
+                buttons: ['Ok']
+            });
+            this.nav.present(alert_1);
+        }
     };
     NFCPage = __decorate([
         ionic_1.Page({

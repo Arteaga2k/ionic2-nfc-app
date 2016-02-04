@@ -4,16 +4,15 @@
     </ion-toolbar>
     <ion-content>
         <ion-list>
-            <button ion-item *ngFor="#p of pages" (click)="openPage(p)">
-                {{p.title}}
+            <button ion-item *ngFor="#p of pages" (click)="openPage(p)"  >
+                <ion-icon name="{{p.icon}}"></ion-icon> {{p.title}}
             </button>
-            <button ion-item menuClose="leftMenu" detail-none>
-                Close Menu
-            </button>
+            <button ion-item (click)="logout()"><ion-icon name="exit"></ion-icon> Logout</button>
+            <button ion-item menuClose="leftMenu" detail-none><ion-icon name="close"></ion-icon> Close Menu</button>
         </ion-list>
     </ion-content>
 </ion-menu>
 <ion-view>
-    <ion-nav id="nav" [root]="rootPage" #content swipe-back-enabled="false" align="center"></ion-nav>
+    <ion-nav id="nav" [root]="rootPage" #content swipe-back-enabled="false"></ion-nav>
 </ion-view>
 

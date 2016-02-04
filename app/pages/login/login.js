@@ -29,6 +29,7 @@ var LoginPage = (function () {
         event.preventDefault();
         if (this.loginForm.value.username.toLowerCase() === "admin" && this.loginForm.value.password === "admin") {
             this.nav.setRoot(nfc_1.NFCPage);
+            localStorage.setItem('NFC-APP-TOKEN', btoa(this.loginForm.value.username.toLowerCase() + ':' + this.loginForm.value.password.toLowerCase()));
         }
         else {
             var alert_1 = ionic_1.Alert.create({

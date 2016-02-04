@@ -1,0 +1,17 @@
+<ion-navbar *navbar hideBackButton class="show-navbar android-attr" padding primary>
+    <button menuToggle>
+        <ion-icon name='menu'></ion-icon>
+    </button>
+    <ion-title>Saved tags</ion-title>
+</ion-navbar>
+<ion-content padding class="has-header">
+    <ion-list>
+        <ion-item *ngFor='#tag of tags'>
+            <ion-thumbnail item-left>
+                <img src="img/nfc.png">
+            </ion-thumbnail>
+            <h2>Tag id: {{tag.id}}</h2>
+            <p *ngFor='#techType of tag.techTypes'>Type: {{techType}}</p>
+        </ion-item>
+    </ion-list>
+</ion-content>
