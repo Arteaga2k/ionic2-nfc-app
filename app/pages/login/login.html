@@ -1,18 +1,18 @@
-<ion-content class="has-header" padding>
+<ion-content class="has-header" padding align="center">
     <form [ngFormModel]="loginForm" (submit)="login($event)" style="padding-top: 50px">
-        <ion-input stacked-label>
-            <ion-label>Username</ion-label>
-            <input type="text" ngControl="username">
-        </ion-input>
+        <ion-list no-lines>
+            <ion-item>
+                <ion-label  stacked-label>Username</ion-label>
+                <ion-input type="text" placeholder="admin" ngControl="username"></ion-input>
+            </ion-item>
 
-        <ion-input stacked-label>
-            <ion-label>Password</ion-label>
-            <input type="password" ngControl="password">
-        </ion-input>
-
+            <ion-item>
+                <ion-label stacked-label>Password</ion-label>
+                <ion-input type="password" placeholder="admin" ngControl="password"></ion-input>
+            </ion-item>
+        </ion-list>
         <div>
             <button block type="submit" [disabled]="!loginForm.valid">Login</button>
         </div>
     </form>
-    <div padding>Credentials: admin/admin</div>
 </ion-content>

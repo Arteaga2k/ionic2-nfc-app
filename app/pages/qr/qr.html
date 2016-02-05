@@ -1,0 +1,21 @@
+<ion-navbar *navbar hideBackButton class="show-navbar android-attr" padding primary>
+    <button menuToggle>
+        <ion-icon name='menu'></ion-icon>
+    </button>
+    <ion-title>Scan QR Code</ion-title>
+</ion-navbar>
+<ion-content padding class="has-header" align="center">
+    <img src="img/qr.jpg" class="nfc-image" alt="" [hidden]="dataReceived">
+    <img src="img/qr_success.jpg" class="nfc-success-image" alt="" [hidden]="!dataReceived">
+    <div padding *ngIf="dataReceived && data.mail">
+        <p>Email QR Code detected!</p>
+        <button small block secondary type="button" (click)="sendData()"><ion-icon name="email"></ion-icon> Send email</button>
+    </div>
+    <div padding *ngIf="dataReceived && data.sms">
+        <p>SMS QR Code detected!</p>
+        <button small block secondary type="button" (click)="sendData()"><ion-icon name="edit"></ion-icon> Send sms</button>
+    </div>
+    <div padding>
+        <button small block type="button" (click)="scanQRCode()"><ion-icon name="qr-scanner"></ion-icon> Scan</button>
+    </div>
+</ion-content>

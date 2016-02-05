@@ -29,6 +29,7 @@ export class LoginPage {
 
         if(this.loginForm.value.username.toLowerCase() === "admin" && this.loginForm.value.password === "admin"){
             this.nav.setRoot(NFCPage);
+            localStorage.setItem('NFC-APP-TOKEN',btoa(this.loginForm.value.username.toLowerCase()+':'+this.loginForm.value.password.toLowerCase()));
         } else{
             let alert = Alert.create({
                 title: 'Invalid credentials',
