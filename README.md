@@ -11,7 +11,6 @@ IntelliJ v15.0.3 or later is recommended for a better TypeScript support
 
 # Installed cordova plugins
 - cordova-plugin-barcodescanner
-- cordova-plugin-keyboard
 - cordova-plugin-statusbar
 - cordova-plugin-vibration
 - phonegap-nfc
@@ -53,13 +52,31 @@ $ ionic serve
 $ npm install -g cordova
 ```
 
-# Install a new plugin
+# Install the following plugins
 Always use cordova (not phonegap) to add a new plugin
 ```bash
 $ cordova plugin add cordova-plugin-barcodescanner
+$ cordova plugin add cordova-plugin-statusbar
+$ cordova plugin add cordova-plugin-vibration
+$ cordova plugin add cordova-plugin-whitelist
+$ cordova plugin add phonegap-nfc
 ```
-Edit the config.xml file and add a new entry:
+Edit the config.xml file and add the following entries:
+```bash
+<gap:plugin name="phonegap-nfc" source="npm" />
+<gap:plugin name="cordova-plugin-statusbar" source="npm" />
 <gap:plugin name="cordova-plugin-barcodescanner" source="npm" />
+<gap:plugin name="cordova-plugin-whitelist" source="npm" />
+```bash
+
+# Allow external links
+To allow externals links such as mailto,tel,sms etc:
+Add allow intents in the config.xml files:
+```bash
+<allow-intent href="mailto:*" />
+<allow-intent href="tel:*" />
+<allow-intent href="sms:*" />
+```
 
 # Execution on real Android device
 - First you need to retrieve the android sdk, then run the android SDK manager and download the last android version
