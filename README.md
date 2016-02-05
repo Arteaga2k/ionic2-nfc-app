@@ -95,7 +95,7 @@ $ ionic run android
 - If you've got a "wrong api version" error, then edit the config.xml file in the source project and change 
 the android preference: android-minSdkVersion
 
-# TypeScript compilation in IntelliJ v<15.0.3
+# TypeScript compilation in IntelliJ v older than 15.0.3
 - First, read this link: https://www.jetbrains.com/idea/help/transpiling-typescript-to-javascript.html
 - Basically you need to:
     - Install TypeScript via npm
@@ -113,7 +113,7 @@ the android preference: android-minSdkVersion
     - Click "Apply" then "OK"
 - The TypeScript compiler should be set correctly.
 
-# TypeScript compilation in IntelliJ v>=15.0.3
+# TypeScript compilation in IntelliJ v 15.0.3 or later
 - First, read this link: https://www.jetbrains.com/idea/help/transpiling-typescript-to-javascript.html
 - Basically you need to:
     - Install TypeScript via npm
