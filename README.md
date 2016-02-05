@@ -61,13 +61,14 @@ $ cordova plugin add cordova-plugin-vibration
 $ cordova plugin add cordova-plugin-whitelist
 $ cordova plugin add phonegap-nfc
 ```
+
 Edit the config.xml file and add the following entries:
 ```bash
 <gap:plugin name="phonegap-nfc" source="npm" />
 <gap:plugin name="cordova-plugin-statusbar" source="npm" />
 <gap:plugin name="cordova-plugin-barcodescanner" source="npm" />
 <gap:plugin name="cordova-plugin-whitelist" source="npm" />
-```bash
+```
 
 # Allow external links
 To allow externals links such as mailto,tel,sms etc:
