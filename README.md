@@ -1,6 +1,9 @@
 CROSS PLATFORM NFC
 ==========
 
+# IDE
+IntelliJ v15.0.3 or later is recommended for a better TypeScript support
+
 # Structure
 - Angular v2.0.0-beta.3
 - Ionic Framework v2.0.0-alpha.54
@@ -74,15 +77,34 @@ $ ionic run android
 - If you've got a "wrong api version" error, then edit the config.xml file in the source project and change 
 the android preference: android-minSdkVersion
 
-# TypeScript compilation in IntelliJ
+# TypeScript compilation in IntelliJ v < 15.0.3
 - First, read this link: https://www.jetbrains.com/idea/help/transpiling-typescript-to-javascript.html
 - Basically you need to:
+    - Install TypeScript via npm
+    ```bash
+    $ npm install -g typescript 
+    ```
     - Download the typescriptServices.js, lib.d.ts, and lib.es6.d.ts files from https://github.com/Microsoft/TypeScript/.
     - Go to File -> Settings and click TypeScript under Languages & Frameworks
+    - Set the NodeJS installation folder path
     - Select "Enable TypeScript Compiler"
     - Click "Edit" in the Compiler version area
     - In the Configure TypeScript Compiler dialog box that opens, choose Custom directory and specify the folder 
     where the downloaded typescript files are stored
     - In the "Command line options" input, set this value: "--module "commonjs" --experimentalDecorators"
+    - Click "Apply" then "OK"
+- The TypeScript compiler should be set correctly.
+
+# TypeScript compilation in IntelliJ v >= 15.0.3
+- First, read this link: https://www.jetbrains.com/idea/help/transpiling-typescript-to-javascript.html
+- Basically you need to:
+    - Install TypeScript via npm
+    ```bash
+    $ npm install -g typescript 
+    ```
+    - Go to File -> Settings and click TypeScript under Languages & Frameworks
+    - Set the NodeJS installation folder path
+    - Select "Enable TypeScript Compiler"
+    - Select "Use tconfig.json"
     - Click "Apply" then "OK"
 - The TypeScript compiler should be set correctly.
