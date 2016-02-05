@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.phonegap.helloworld" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
-    <name>Nfc App</name>
+<widget id="fr.redfroggy.nfcreader" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
+    <name>NFC Reader</name>
     <description>
-        NFc application based on iconic 2 Framework
+        NFC application based on iconic 2 Framework
     </description>
     <author email="michael.desigaud@redfroggy.fr" href="http://redfroggy.fr">
         Red Froggy Team
