@@ -4,6 +4,5 @@ platforms/
 plugins/
 .idea/
 *.iml
-*.swp
-.DS_Store
-Thumbs.db
+app/**/*.js
+app/**/*.js.map
