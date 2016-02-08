@@ -157,5 +157,9 @@ Unit tests are using:
 - Karma (karma.conf.js)
 - Spec bundle (spec.bundle.js)
 - Tests file are under www/spec folder with suffix .spec.ts
-- To run tests: npm test
-- Generate reports in junit and HTML
+
+To run tests: 
+```bash
+$ npm test
+```
+Generate reports in junit and HTML.
