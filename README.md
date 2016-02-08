@@ -20,9 +20,27 @@ IntelliJ v15.0.3 or later is recommended for a better TypeScript support
 A starting project for ionic2 based on TypeScript
 
 # Installation
+Install the node dependencies:
+```bash
+$ npm install
+```
+
 You need to install tsd (Type Script Definition Manager) required by zonejs in administrator mode:
 ```bash
 $ npm install -g tsd
+```
+To search for typings :
+```bash
+$ tsd query jasmine
+```
+To add a typing :
+```bash
+$ tsd add jasmine
+```
+Files will be added to the typings folder
+To user a typing in a TypeScript file, add:
+```bash
+$ ///<reference path="pathTo/typings/jasmine/jasmine.d.ts" />
 ```
 
 First you need to install the ionic command in version 2:
@@ -95,6 +113,10 @@ $ ionic run android
 - If you've got a "wrong api version" error, then edit the config.xml file in the source project and change 
 the android preference: android-minSdkVersion
 
+# Quality code
+TSLint checks TypeScript code for errors, readability and maintainability.
+tslint.json is the configuration file for TSLint
+
 # TypeScript compilation in IntelliJ v older than 15.0.3
 - First, read this link: https://www.jetbrains.com/idea/help/transpiling-typescript-to-javascript.html
 - Basically you need to:
@@ -126,3 +148,12 @@ the android preference: android-minSdkVersion
     - Select "Use tconfig.json"
     - Click "Apply" then "OK"
 - The TypeScript compiler should be set correctly.
+
+# Unit tests
+Unit tests are using:
+- Webpack (webpack.test.config.js)
+- Karma (karma.conf.js)
+- Spec bundle (spec.bundle.js)
+- Tests file are under www/spec folder with suffix .spec.ts
+- To run tests: npm test
+- Generate reports in junit and HTML

@@ -3,5 +3,7 @@ www/build/
 platforms/
 plugins/
 .idea/
+reports/
 *.iml
 app/**/*.js
+app/**/*.js.map

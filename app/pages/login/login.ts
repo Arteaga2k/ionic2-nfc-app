@@ -3,7 +3,7 @@
  * Created by Michael DESIGAUD on 02/02/2016.
  */
 
-import {Page, NavController,Alert} from 'ionic-framework/ionic';
+import {Page, NavController, Alert} from 'ionic-framework/ionic';
 import {Inject} from 'angular2/core';
 import {FormBuilder, Validators} from 'angular2/common';
 import {NFCPage} from '../nfc/nfc';
@@ -16,21 +16,21 @@ export class LoginPage {
     nav;
     loginForm;
     // We inject the router via DI
-    constructor(@Inject(FormBuilder) form: FormBuilder,@Inject(NavController) nav: NavController) {
+    constructor(@Inject(FormBuilder) form: FormBuilder, @Inject(NavController) nav: NavController) {
         this.nav = nav;
         this.loginForm = form.group({
-            username: ["", Validators.required],
-            password: ["", Validators.required]
+            username: ['', Validators.required],
+            password: ['', Validators.required]
         });
     }
     login(event) {
         // This will be called when the user clicks on the Login button
         event.preventDefault();
 
-        if(this.loginForm.value.username.toLowerCase() === "admin" && this.loginForm.value.password === "admin"){
+        if (this.loginForm.value.username.toLowerCase() === 'admin' && this.loginForm.value.password === 'admin') {
             this.nav.setRoot(NFCPage);
-            localStorage.setItem('NFC-APP-TOKEN',btoa(this.loginForm.value.username.toLowerCase()+':'+this.loginForm.value.password.toLowerCase()));
-        } else{
+            localStorage.setItem('NFC-APP-TOKEN', btoa(this.loginForm.value.username.toLowerCase() + ':' + this.loginForm.value.password.toLowerCase()));
+        } else {
             let alert = Alert.create({
                 title: 'Invalid credentials',
                 subTitle: 'You entered invalid credentials !',
