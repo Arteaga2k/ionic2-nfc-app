@@ -155,8 +155,8 @@ tslint.json is the configuration file for TSLint
 Unit tests are using:
 - Webpack (webpack.test.config.js)
 - Karma (karma.conf.js)
-- Spec bundle (spec.bundle.js)
-- Tests file are under www/spec folder with suffix .spec.ts
+- Jasmine
+Tests file are under www/spec folder with suffix .spec.ts
 
 To run tests: 
 ```bash
