@@ -1,5 +1,5 @@
 import {App, IonicApp, Platform, Keyboard} from 'ionic-framework/ionic';
-import {Inject,Directive, ElementRef, Renderer} from 'angular2/core';
+import {Inject, Directive, ElementRef, Renderer} from 'angular2/core';
 import {NFCPage} from './pages/nfc/nfc';
 import {LoginPage} from './pages/login/login';
 import {TagsPage} from './pages/tags/tags';
@@ -16,12 +16,12 @@ export class NfcApp {
   constructor(@Inject(IonicApp) app: IonicApp, @Inject(Platform) platform: Platform) {
     this.app = app;
     this.pages = [
-      {title: 'Read Tag', component: NFCPage,icon:'card'},
-      {title:'Saved tags', component: TagsPage, icon:'list'},
-      {title:'Scan QR Code', component: QRPage, icon:'qr-scanner'}
+      {title: 'Read Tag', component: NFCPage, icon: 'card'},
+      {title: 'Saved tags', component: TagsPage, icon: 'list'},
+      {title: 'Scan QR Code', component: QRPage, icon: 'qr-scanner'}
     ];
 
-    if(this.isAuthTokenValid()){
+    if (this.isAuthTokenValid()) {
       console.log('Automatically logged');
       this.rootPage = NFCPage;
     } else {
@@ -46,9 +46,9 @@ export class NfcApp {
       //StatusBar.setStyle(StatusBar.LIGHT_CONTENT);
     });
   }
-  isAuthTokenValid(){
+  isAuthTokenValid() {
     let token = localStorage.getItem('NFC-APP-TOKEN');
-    if(token){
+    if (token) {
       let data = atob(token).split(':');
       return data.length === 2 && data[0].toLowerCase() === 'admin' && data[1].toLowerCase() === 'admin';
     }
@@ -61,7 +61,7 @@ export class NfcApp {
     nav.setRoot(page.component);
     this.app.getComponent('leftMenu').close();
   }
-  logout(){
+  logout() {
     localStorage.removeItem('NFC-APP-TOKEN');
     let nav = this.app.getComponent('nav');
     this.app.getComponent('leftMenu').enable(false);
