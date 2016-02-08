@@ -24,28 +24,30 @@ Install the node dependencies:
 ```bash
 $ npm install
 ```
-
 You need to install tsd (Type Script Definition Manager) required by zonejs in administrator mode:
 ```bash
 $ npm install -g tsd
 ```
+First you need to install the ionic command in version 2:
+```bash
+$ npm install -g ionic@beta
+```
+
+# Typings
 To search for typings :
 ```bash
 $ tsd query jasmine
 ```
+
 To add a typing :
 ```bash
 $ tsd add jasmine
 ```
-Files will be added to the typings folder
-To user a typing in a TypeScript file, add:
+Files will be added to the typings folder. 
+
+To use a typing in a TypeScript file, add:
 ```bash
 $ ///<reference path="pathTo/typings/jasmine/jasmine.d.ts" />
-```
-
-First you need to install the ionic command in version 2:
-```bash
-$ npm install -g ionic@beta
 ```
 
 # Create a new project
