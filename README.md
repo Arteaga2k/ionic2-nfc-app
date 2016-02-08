@@ -28,9 +28,13 @@ You need to install tsd (Type Script Definition Manager) required by zonejs in a
 ```bash
 $ npm install -g tsd
 ```
-First you need to install the ionic command in version 2:
+You need to install the ionic command in version 2:
 ```bash
 $ npm install -g ionic@beta
+```
+You need to install the karma command:
+```bash
+$ npm install -g karma
 ```
 
 # Typings
