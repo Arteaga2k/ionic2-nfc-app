@@ -43,15 +43,17 @@ To search for typings :
 $ tsd query jasmine
 ```
 
-To add a typing :
+Add the following typings :
 ```bash
 $ tsd add jasmine
+$ tsd add cordova
 ```
 Files will be added to the typings folder. 
 
 To use a typing in a TypeScript file, add:
 ```bash
 $ ///<reference path="pathTo/typings/jasmine/jasmine.d.ts" />
+$ ///<reference path="pathTo/typings/cordova/cordova.d.ts" />
 ```
 
 # Create a new project
