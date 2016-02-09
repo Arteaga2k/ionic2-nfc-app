@@ -13,7 +13,7 @@ import {NFCPage} from '../nfc/nfc';
     templateUrl: 'build/pages/login/login.html'
 })
 export class LoginPage {
-    nav;
+    nav:NavController;
     loginForm;
     // We inject the router via DI
     constructor(@Inject(FormBuilder) form: FormBuilder, @Inject(NavController) nav: NavController) {
@@ -23,7 +23,7 @@ export class LoginPage {
             password: ['', Validators.required]
         });
     }
-    login(event) {
+    login(event:any):void {
         // This will be called when the user clicks on the Login button
         event.preventDefault();
 

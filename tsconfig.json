@@ -12,7 +12,8 @@
     "inlineSources": false
   },
   "files": [
-    "app/app.ts"
+    "app/app.ts",
+    "app/pipes/stringDatePipe.ts"
   ],
   "exclude": [
     "node_modules"
