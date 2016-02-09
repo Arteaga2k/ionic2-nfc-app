@@ -23,7 +23,7 @@ export class LoginPage {
             password: ['', Validators.required]
         });
     }
-    login(event:any) {
+    login(event:any):void {
         // This will be called when the user clicks on the Login button
         event.preventDefault();
 

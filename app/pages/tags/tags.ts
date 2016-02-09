@@ -4,20 +4,24 @@
  */
 import {Page} from 'ionic-framework/ionic';
 import {Inject, NgZone} from 'angular2/core';
-
+import {StringDatePipe} from '../../pipes/stringDatePipe';
 
 @Page({
-    templateUrl: 'build/pages/tags/tags.html'
+    templateUrl: 'build/pages/tags/tags.html',
+    pipes: [StringDatePipe]
 })
 export class TagsPage {
-    tags;
+    tags:Array<any>;
     constructor() {
         this.getTags();
     }
-    getTags() {
-        let tagsJSON = localStorage.getItem('NFC-APP-TAGS');
+    getTags():void {
+        let tagsJSON:Array<any> = localStorage.getItem('NFC-APP-TAGS');
         if (tagsJSON) {
             this.tags = JSON.parse(tagsJSON);
+            if(this.tags.length > 0) {
+                this.tags.forEach((tag) => tag.date = new Date(tag.date));
+            }
         }
     }
 }

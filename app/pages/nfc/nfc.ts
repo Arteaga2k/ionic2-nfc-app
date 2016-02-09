@@ -10,7 +10,7 @@ import {Inject, NgZone} from 'angular2/core';
 
 
 @Page({
-    templateUrl: 'app/pages/nfc/nfc.html',
+    templateUrl: './build/pages/nfc/nfc.html',
     selector: 'nfc',
 })
 export class NFCPage {
@@ -61,12 +61,13 @@ export class NFCPage {
     }
     saveTag():void {
         if(this.tag.id) {
+            this.tag.key = btoa(this.tag.id);
             if(!localStorage.getItem('NFC-APP-TAGS')) {
                 localStorage.setItem('NFC-APP-TAGS', JSON.stringify([]));
             }
 
             let tags:Array<any> = JSON.parse(localStorage.getItem('NFC-APP-TAGS'));
-            tags = tags.filter((item) => item.id === this.tag.id);
+            tags = tags.filter((item) => item.key !== this.tag.key);
 
             this.tag.date = new Date().toISOString();
             tags.push(this.tag);

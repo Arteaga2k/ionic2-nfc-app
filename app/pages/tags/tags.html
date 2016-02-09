@@ -12,6 +12,7 @@
             </ion-thumbnail>
             <h2>Tag id: {{tag.id}}</h2>
             <p *ngFor='#techType of tag.techTypes'>Type: {{techType}}</p>
+            <p>Date: {{tag.date | stringDate:'short'}}</p>
         </ion-item>
     </ion-list>
 </ion-content>
