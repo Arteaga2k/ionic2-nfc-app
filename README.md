@@ -8,7 +8,6 @@ An NFC Reader application based on ionic2 and TypeScript (ES6)
 ![image](http://i.imgur.com/zHDltDZ.png?2)
 ![image](http://i.imgur.com/KPvSZ9h.png?1)
 ![image](http://i.imgur.com/PL38LTB.png?1)
-![image](http://i.imgur.com/QbcJaJk.png?1)
 
 # IDE
 IntelliJ v15.0.3 or later is recommended for a better TypeScript support
