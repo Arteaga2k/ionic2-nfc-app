@@ -4,6 +4,9 @@ platforms/
 plugins/
 .idea/
 reports/
+coverage/
 *.iml
 app/**/*.js
 app/**/*.js.map
+www/spec/**/*.js
+www/spec/**/*.js.map

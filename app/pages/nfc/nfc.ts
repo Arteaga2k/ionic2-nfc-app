@@ -3,78 +3,84 @@
  * Created by Michael DESIGAUD on 02/02/2016.
  */
 
+///<reference path="../../../typings/cordova/cordova.d.ts" />
+
 import {Page, NavController, Platform, Alert} from 'ionic-framework/ionic';
 import {Inject, NgZone} from 'angular2/core';
+import {TranslatePipe, TranslateService} from 'ng2-translate/ng2-translate';
 
 
 @Page({
-    templateUrl: 'build/pages/nfc/nfc.html'
+    templateUrl: './build/pages/nfc/nfc.html',
+    selector: 'nfc',
+    pipes: [TranslatePipe]
 })
 export class NFCPage {
-    tagInfos;
-    tag;
+    tagInfos:Array<any>;
+    tag:any;
     dataReceived:boolean;
     zone:NgZone;
     nav:NavController;
-    constructor(@Inject(NavController) nav: NavController,@Inject(Platform) platform: Platform, @Inject(NgZone) zone: NgZone) {
+    translate:TranslateService;
+    constructor(@Inject(NavController) nav: NavController,@Inject(Platform) platform: Platform, @Inject(NgZone) zone: NgZone, @Inject(TranslateService) translate: TranslateService) {
         this.nav = nav;
         this.zone = zone;
         this.tagInfos = [];
         this.dataReceived = false;
+        this.translate = translate;
         platform.ready().then(() => {
-            if(window.StatusBar){
+            if(window.StatusBar) {
                 StatusBar.hide();
             }
             this.addNfcListeners();
         });
     }
-    addNfcListeners(){
+    addNfcListeners():void {
         var self = this;
-        nfc.addTagDiscoveredListener((tagEvent,data) => {
-            console.log(tagEvent,data);
+        nfc.addTagDiscoveredListener((tagEvent:any) => {
             self.zone.run(() => {
                 self.readTagData(tagEvent);
             });
         }, () => {
-            console.log("Listening for NFC Tag");
+            console.log('Listening for NFC Tag');
         });
     }
-    readTagData(tagEvent){
-        let data = [];
+    readTagData(tagEvent:any):void {
+        let data:Array<any> = [];
         Object.keys(tagEvent.tag).forEach((key) => {
             data.push({key: key, value: tagEvent.tag[key]});
         });
-        console.log(data);
         this.tag = tagEvent.tag;
         this.tagInfos = data;
         this.dataReceived = true;
         this.vibrate(2000);
     }
-    vibrate(time){
-        if(navigator.vibrate){
+    vibrate(time:number):void {
+        if(navigator.vibrate) {
             navigator.vibrate(time);
         }
     }
-    scanNewTag(){
+    scanNewTag():void {
         this.dataReceived = false;
     }
-    saveTag(){
-        if(this.tag.id){
-            if(!localStorage.getItem('NFC-APP-TAGS')){
+    saveTag():void {
+        if(this.tag.id) {
+            this.tag.key = btoa(this.tag.id);
+            if(!localStorage.getItem('NFC-APP-TAGS')) {
                 localStorage.setItem('NFC-APP-TAGS', JSON.stringify([]));
             }
 
-            let tags = JSON.parse(localStorage.getItem('NFC-APP-TAGS'));
-            tags = tags.filter((item) => item.id === this.tag.id);
+            let tags:Array<any> = JSON.parse(localStorage.getItem('NFC-APP-TAGS'));
+            tags = tags.filter((item) => item.key !== this.tag.key);
 
             this.tag.date = new Date().toISOString();
             tags.push(this.tag);
 
             localStorage.setItem('NFC-APP-TAGS', JSON.stringify(tags));
 
-            let alert = Alert.create({
+            let alert:Alert = Alert.create({
                 title: 'Tag saved',
-                subTitle: "Tag '" + this.tag.id + "' saved!",
+                subTitle: 'Tag \'' + this.tag.id + '\' saved!',
                 buttons: ['Ok']
             });
             this.nav.present(alert);

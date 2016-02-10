@@ -1,0 +1,35 @@
+<ion-navbar *navbar hideBackButton class="show-navbar android-attr" padding primary>
+    <button menuToggle>
+        <ion-icon name='menu'></ion-icon>
+    </button>
+    <ion-title>{{'account.title' | translate}}</ion-title>
+</ion-navbar>
+
+<ion-content class="has-header components-demo cards-bg">
+
+    <ion-card>
+
+        <ion-item>
+            <ion-avatar item-left>
+                <img src="img/user.png">
+            </ion-avatar>
+            <h2>{{account.username}}</h2>
+            <p>{{'account.profile' | translate}}: {{account.getProfile()}}</p>
+        </ion-item>
+
+        <ion-card-content>
+            <ion-list>
+                <ion-item>
+                    <ion-label>{{'account.language' | translate}}</ion-label>
+                    <ion-select [(ngModel)]="app.lang" (change)="changeLocale()">
+                        <ion-option *ngFor='#language of languages' value="{{language.code}}">{{language.translateKey | translate}}</ion-option>
+                    </ion-select>
+                </ion-item>
+            </ion-list>
+        </ion-card-content>
+
+        <ion-item>
+            <ion-note item-right>{{'account.last-connection' | translate}}: {{account.lastConnection | fromNow}}</ion-note>
+        </ion-item>
+    </ion-card>
+</ion-content>

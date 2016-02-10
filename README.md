@@ -1,44 +1,140 @@
 CROSS PLATFORM NFC
 ==========
 
+# Presentation
+An NFC Reader application based on ionic2 and TypeScript (ES6)
+
+# Screenshots
+![image](http://i.imgur.com/zHDltDZ.png?2)
+![image](http://i.imgur.com/KPvSZ9h.png?1)
+![image](http://i.imgur.com/PL38LTB.png?1)
+
 # IDE
 IntelliJ v15.0.3 or later is recommended for a better TypeScript support
 
-# Structure
-- Angular v2.0.0-beta.3
-- Ionic Framework v2.0.0-alpha.54
-- ZoneJS v0.5.11
+# Features
+- Left menu
+- Login
+- Remember me (user saved in local storage)
+- Scan an nfc tag
+- Save a tag in local storage
+- List all saved tags
+- My account
+- Language selection
+- i18n application: French and english with dynamic reload
+- Unit tests
+   
 
-# Installed cordova plugins
-- cordova-plugin-barcodescanner
-- cordova-plugin-statusbar
-- cordova-plugin-vibration
-- phonegap-nfc
-- cordova-plugin-whitelist
+# Stack
+- Angular v2
+- Ionic Framework v2
+- Webpack
+- Karma
+- Jasmine
+- PhantomJS
+- Angular translate v2
 
-# Presentation
-A starting project for ionic2 based on TypeScript
+# Project Structure
+
+```
+- app: Application files (TypeScript)
+    -- app.ts: Ionic2 entry point
+    -- classes: Common classes
+    -- pages: Ionic views
+        --- app.html
+        --- login
+            ---- login.ts
+            ---- login.scss
+            ---- login.html
+        --- account
+        --- nfc
+        --- qr
+        --- tags
+    -- pipes: Angular2 @Pipe components
+    -- utils: Utility classes
+- www: Assets folder
+    -- index.html: Entry point
+    -- build (not in git repository): Production folder where sources are minified
+    -- css
+    -- i18n: 18n files
+        --- en.json
+        --- fr.json
+    -- img: Images of the application
+    -- js
+    -- res
+    -- spec: Unit tests folder
+        --- mocks: Cordvoa api mocks
+        --- src
+- typings: TypeScript interfaces for libraries
+    -- cordvoa
+    -- jasmine
+    -- lodash
+    -- moment
+- platforms (not in git repository): Installed platforms (android, ios, etc..) using ```$ionic add platform``` command
+- reports (not in git repository): Unit tests reports
+    -- junit (used by jenkins)
+    -- html
+- coverage: Coverage reports
+    -- Format text, json ,html and cobertura (for jenkins)
+- node_modules (not in git repository): NPM dependencies
+- plugins (not in git repository): Cordova plugins
+    -- cordova-plugin-barcodescanner
+    -- cordova-plugin-statusbar
+    -- cordova-plugin-vibration
+    -- phonegap-nfc
+    -- cordova-plugin-whitelist
+- ionic.config.js: Ionic configuration file
+- spec-bundle.js: Used for unit tests only with Karma, webpack and ES6
+- karma.conf.js: Karma configuration file for unit tests
+- webpack.config.test.config.js: Build configuration file used for unit tests
+- webpack.config.js: Build configuration file
+- tsconfig.json: TypeScript configuration file
+- tslint.json: TSLint configuration file
+- package.json: For managing npm dependencies
+    -- Scripts: ```$ npm test``` for executing unit tests through karma
+- config.xml: Phonegap configuration file
+- resources: Icons and splash resources for every platforms
+```
+
 
 # Installation
+Install the node dependencies:
+```bash
+$ npm install
+```
 You need to install tsd (Type Script Definition Manager) required by zonejs in administrator mode:
 ```bash
 $ npm install -g tsd
 ```
-
-First you need to install the ionic command in version 2:
+You need to install the ionic command in version 2:
 ```bash
 $ npm install -g ionic@beta
 ```
-
-# Create a new project
-If you need to create a new project in pure JavaScript:
+You need to install the karma command:
 ```bash
-$ ionic start myNewproject --v2
+$ npm install -g karma
+```
+You need to install the cordova command
+```bash
+$ npm install -g cordova
 ```
 
-If you need to create a new project in TypeScript:
+# Typings
+To search for typings :
 ```bash
-$ ionic start myNewproject --v2 --ts
+$ tsd query jasmine
+```
+
+To add a typing :
+```bash
+$ tsd add jasmine
+```
+Files will be added to the typings folder. 
+
+To use a typing in a TypeScript file, add:
+```bash
+$ ///<reference path="pathTo/typings/jasmine/jasmine.d.ts" />
+$ ///<reference path="pathTo/typings/cordova/cordova.d.ts" />
 ```
 
 # Execution on desktop
@@ -47,12 +143,7 @@ For starting the project on desktop:
 $ ionic serve
 ```
 
-# Install cordova command
-```bash
-$ npm install -g cordova
-```
-
-# Install the following plugins
+# Install the following cordova plugins
 Always use cordova (not phonegap) to add a new plugin
 ```bash
 $ cordova plugin add cordova-plugin-barcodescanner
@@ -83,17 +174,21 @@ Add allow intents in the config.xml files:
 - First you need to retrieve the android sdk, then run the android SDK manager and download the last android version
 - Then you need to configure the ANDROID_HOME environment variable based on the location of your Android SDK folder.
 - You have to add the android platform in ionic
-```bash
+```
 $ ionic platform add android
 ```
 - Plug in your device to your computer via USB
 - Run: 
-```bash
+```
 $ ionic run android
 ```
 - The application should be installed to your device and start automatically.
 - If you've got a "wrong api version" error, then edit the config.xml file in the source project and change 
 the android preference: android-minSdkVersion
+
+# Quality code
+TSLint checks TypeScript code for errors, readability and maintainability.
+tslint.json is the configuration file for TSLint
 
 # TypeScript compilation in IntelliJ v older than 15.0.3
 - First, read this link: https://www.jetbrains.com/idea/help/transpiling-typescript-to-javascript.html
@@ -126,3 +221,16 @@ the android preference: android-minSdkVersion
     - Select "Use tconfig.json"
     - Click "Apply" then "OK"
 - The TypeScript compiler should be set correctly.
+
+# Unit tests
+Unit tests are using:
+- Webpack (webpack.test.config.js)
+- Karma (karma.conf.js)
+- Jasmine
+Tests file are under www/spec folder with suffix .spec.ts
+
+To run tests: 
+```bash
+$ npm test
+```
+Generate reports in junit and HTML.
