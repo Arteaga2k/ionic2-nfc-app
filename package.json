@@ -35,13 +35,18 @@
     "tslint": "^3.3.0",
     "tslint-loader": "^2.1.0",
     "typescript": "^1.7.3",
-    "webpack": "1.12.12"
+    "typedoc": "^0.3.12",
+    "webpack": "1.12.12",
+    "remap-istanbul": "^0.5.1"
   },
   "scripts": {
-    "test": "karma start"
+    "test": "karma start",
+    "docs": "typedoc --json typedoc.json --exclude **/*.spec.ts app"
   },
   "name": "crossplatformnfc",
+  "author": "Michael Desigaud <michael.desigaud@redfroggy.fr>",
   "description": "crossPlatformNfc: An Ionic project",
+  "version": "0.0.1",
   "cordovaPlugins": [],
   "cordovaPlatforms": [
     "android"

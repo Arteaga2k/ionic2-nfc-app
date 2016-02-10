@@ -56,10 +56,10 @@ module.exports = function(config) {
         coverageReporter: {
             dir : 'coverage/',
             reporters: [
-                { type: 'text-summary' },
-                { type: 'json' },
-                { type: 'html' },
-                { type: 'cobertura' }
+                { type: 'text-summary', subdir: 'report-text' },
+                { type: 'json', subdir: 'report-json' },
+                { type: 'html', subdir: 'report-html' },
+                { type: 'cobertura', subdir: 'report-cobertura' }
             ]
         },
 
