@@ -4,21 +4,24 @@ import {NFCPage} from './pages/nfc/nfc';
 import {LoginPage} from './pages/login/login';
 import {TagsPage} from './pages/tags/tags';
 import {QRPage} from './pages/qr/qr';
+import {AccountPage} from './pages/account/account';
+import {NavController} from 'ionic-framework/ionic';
+import {User} from './classes/user';
 
 @App({
   templateUrl: './build/pages/app.html',
   config: {} // http://ionicframework.com/docs/v2/api/config/Config/
 })
 export class NfcApp {
-  app;
+  app:IonicApp;
   rootPage;
-  pages;
+  pages:Array<any>;
   constructor(@Inject(IonicApp) app: IonicApp, @Inject(Platform) platform: Platform) {
     this.app = app;
     this.pages = [
       {title: 'Read Tag', component: NFCPage, icon: 'card'},
       {title: 'Saved tags', component: TagsPage, icon: 'list'},
-      {title: 'Scan QR Code', component: QRPage, icon: 'qr-scanner'}
+      {title: 'My account', component: AccountPage, icon: 'person'}
     ];
 
     if (this.isAuthTokenValid()) {
@@ -46,24 +49,20 @@ export class NfcApp {
       //StatusBar.setStyle(StatusBar.LIGHT_CONTENT);
     });
   }
-  isAuthTokenValid() {
-    let token = localStorage.getItem('NFC-APP-TOKEN');
-    if (token) {
-      let data = atob(token).split(':');
-      return data.length === 2 && data[0].toLowerCase() === 'admin' && data[1].toLowerCase() === 'admin';
-    }
-      return false;
+  isAuthTokenValid():boolean {
+    let user:User = new User(JSON.parse(localStorage.getItem('NFC-APP-TOKEN')));
+    return user && user.isValid();
   }
-  openPage(page) {
+  openPage(page:any):void {
     // navigate to the new page if it is not the current page
     this.app.getComponent('leftMenu').enable(true);
-    let nav = this.app.getComponent('nav');
+    let nav:NavController = this.app.getComponent('nav');
     nav.setRoot(page.component);
     this.app.getComponent('leftMenu').close();
   }
-  logout() {
+  logout():void {
     localStorage.removeItem('NFC-APP-TOKEN');
-    let nav = this.app.getComponent('nav');
+    let nav:NavController = this.app.getComponent('nav');
     this.app.getComponent('leftMenu').enable(false);
     nav.setRoot(LoginPage);
   }

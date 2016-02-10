@@ -33,7 +33,7 @@ export class NFCPage {
     }
     addNfcListeners():void {
         var self = this;
-        nfc.addTagDiscoveredListener((tagEvent:any, data:any) => {
+        nfc.addTagDiscoveredListener((tagEvent:any) => {
             self.zone.run(() => {
                 self.readTagData(tagEvent);
             });

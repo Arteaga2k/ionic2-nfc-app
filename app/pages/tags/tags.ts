@@ -16,7 +16,7 @@ export class TagsPage {
         this.getTags();
     }
     getTags():void {
-        let tagsJSON:Array<any> = localStorage.getItem('NFC-APP-TAGS');
+        let tagsJSON:string = localStorage.getItem('NFC-APP-TAGS');
         if (tagsJSON) {
             this.tags = JSON.parse(tagsJSON);
             if(this.tags.length > 0) {

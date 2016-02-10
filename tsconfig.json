@@ -13,7 +13,8 @@
   },
   "files": [
     "app/app.ts",
-    "app/pipes/stringDatePipe.ts"
+    "app/pipes/stringDatePipe.ts",
+    "app/pipes/fromNowPipe.ts"
   ],
   "exclude": [
     "node_modules"

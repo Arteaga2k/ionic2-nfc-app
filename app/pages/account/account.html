@@ -1,0 +1,29 @@
+<ion-navbar *navbar hideBackButton class="show-navbar android-attr" padding primary>
+    <button menuToggle>
+        <ion-icon name='menu'></ion-icon>
+    </button>
+    <ion-title>My Account</ion-title>
+</ion-navbar>
+
+<ion-content class="has-header components-demo cards-bg">
+
+    <ion-card>
+
+        <ion-item>
+            <ion-avatar item-left>
+                <img src="img/user.png">
+            </ion-avatar>
+            <h2>{{account.username}}</h2>
+            <p>Profile: {{account.getProfile()}}</p>
+        </ion-item>
+
+        <ion-card-content>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur</p>
+        </ion-card-content>
+
+        <ion-item>
+            <ion-note item-right>Last connection: {{account.lastConnection | fromNow}}</ion-note>
+        </ion-item>
+    </ion-card>
+</ion-content>

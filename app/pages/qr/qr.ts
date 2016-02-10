@@ -2,6 +2,7 @@
  * Qr code scanner page
  * Created by Michael DESIGAUD on 04/02/2016.
  */
+
 import {Page, Platform} from 'ionic-framework/ionic';
 import {Inject, NgZone} from 'angular2/core';
 
@@ -13,23 +14,23 @@ export class QRPage {
     dataReceived:boolean;
     zone:NgZone;
     platform:Platform;
-    data;
+    data:any;
     constructor(@Inject(Platform) platform: Platform, @Inject(NgZone) zone: NgZone) {
         this.dataReceived = false;
         this.zone = zone;
         this.platform = platform;
         this.data = {};
         platform.ready().then(() => {
-            if(window.StatusBar){
+            if(window.StatusBar) {
                 StatusBar.hide();
             }
         });
     }
-    scanQRCode(){
+    scanQRCode():void {
         this.dataReceived = false;
         this.platform.ready().then(() => {
-            var self = this;
-            cordova.plugins.barcodeScanner.scan((result) =>{
+            let self:QRPage = this;
+            cordova.plugins.barcodeScanner.scan((result:any) => {
                 console.log(result);
                 self.zone.run(() => {
                     self.data = result;
@@ -39,7 +40,7 @@ export class QRPage {
             });
         });
     }
-    readData(){
+    readData():void {
         if(this.data && this.data.text){
             if(this.data.text.indexOf('MATMSG') !== -1){
                 this.data.mail = true;
@@ -57,7 +58,7 @@ export class QRPage {
             console.log(this.data);
         }
     }
-    sendData(){
+    sendData():void {
         window.location.href = this.data.value;
     }
 }
