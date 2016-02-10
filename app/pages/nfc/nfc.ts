@@ -7,11 +7,13 @@
 
 import {Page, NavController, Platform, Alert} from 'ionic-framework/ionic';
 import {Inject, NgZone} from 'angular2/core';
+import {TranslatePipe, TranslateService} from 'ng2-translate/ng2-translate';
 
 
 @Page({
     templateUrl: './build/pages/nfc/nfc.html',
     selector: 'nfc',
+    pipes: [TranslatePipe]
 })
 export class NFCPage {
     tagInfos:Array<any>;
@@ -19,11 +21,13 @@ export class NFCPage {
     dataReceived:boolean;
     zone:NgZone;
     nav:NavController;
-    constructor(@Inject(NavController) nav: NavController,@Inject(Platform) platform: Platform, @Inject(NgZone) zone: NgZone) {
+    translate:TranslateService;
+    constructor(@Inject(NavController) nav: NavController,@Inject(Platform) platform: Platform, @Inject(NgZone) zone: NgZone, @Inject(TranslateService) translate: TranslateService) {
         this.nav = nav;
         this.zone = zone;
         this.tagInfos = [];
         this.dataReceived = false;
+        this.translate = translate;
         platform.ready().then(() => {
             if(window.StatusBar) {
                 StatusBar.hide();

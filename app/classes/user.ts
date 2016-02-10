@@ -25,13 +25,6 @@ export class User {
             _.assignIn(this, user);
         }
     }
-    constructor(username?:string,password?:string,rememberMe?:boolean) {
-        this.username = username;
-        this.password = password;
-        this.lastConnection = new Date();
-        this.rememberMe = rememberMe;
-        this.role = Profile.ADMIN;
-    }
     isValid():boolean {
         return this.username && this.password
         && this.username.toLowerCase() === 'admin'

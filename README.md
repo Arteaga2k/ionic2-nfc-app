@@ -4,10 +4,12 @@ CROSS PLATFORM NFC
 # IDE
 IntelliJ v15.0.3 or later is recommended for a better TypeScript support
 
-# Structure
+# Stack
 - Angular v2.0.0-beta.3
 - Ionic Framework v2.0.0-alpha.54
 - ZoneJS v0.5.11
+
+# Project Structure
 
 # Installed cordova plugins
 - cordova-plugin-barcodescanner
@@ -54,17 +56,6 @@ To use a typing in a TypeScript file, add:
 ```bash
 $ ///<reference path="pathTo/typings/jasmine/jasmine.d.ts" />
 $ ///<reference path="pathTo/typings/cordova/cordova.d.ts" />
-```
-
-# Create a new project
-If you need to create a new project in pure JavaScript:
-```bash
-$ ionic start myNewproject --v2
-```
-
-If you need to create a new project in TypeScript:
-```bash
-$ ionic start myNewproject --v2 --ts
 ```
 
 # Execution on desktop

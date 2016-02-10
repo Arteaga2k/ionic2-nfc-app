@@ -8,18 +8,22 @@ import {Inject} from 'angular2/core';
 import {FormBuilder, Validators} from 'angular2/common';
 import {NFCPage} from '../nfc/nfc';
 import {User,Profile} from '../../classes/user';
+import {TranslatePipe, TranslateService} from 'ng2-translate/ng2-translate';
 
 @Page({
-    templateUrl: 'build/pages/login/login.html'
+    templateUrl: 'build/pages/login/login.html',
+    pipes: [TranslatePipe]
 })
 export class LoginPage {
     nav:NavController;
     loginForm;
     user:User;
+    translate: TranslateService;
     // We inject the router via DI
-    constructor(@Inject(FormBuilder) form: FormBuilder, @Inject(NavController) nav: NavController) {
+    constructor(@Inject(FormBuilder) form: FormBuilder, @Inject(NavController) nav: NavController, @Inject(TranslateService) translate: TranslateService) {
         this.nav = nav;
         this.user = new User();
+        this.translate = translate;
         this.loginForm = form.group({
             username: ['', Validators.required],
             password: ['', Validators.required],

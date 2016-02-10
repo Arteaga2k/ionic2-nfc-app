@@ -2,13 +2,13 @@
     <button menuToggle>
         <ion-icon name='menu'></ion-icon>
     </button>
-    <ion-title>NFC Tag Reader</ion-title>
+    <ion-title>{{'nfc.title' | translate}}</ion-title>
 </ion-navbar>
 <ion-content padding class="has-header" align="center">
     <img src="img/nfc.png" class="nfc-image" alt="" [hidden]="dataReceived">
     <img src="img/nfc_success.png" class="nfc-success-image" alt="" [hidden]="!dataReceived">
-    <div [hidden]="dataReceived">Tap an NFC tag...</div>
-    <div [hidden]="!dataReceived">New tag detected !</div>
+    <div [hidden]="dataReceived">{{'nfc.tap-text' | translate}}</div>
+    <div [hidden]="!dataReceived">{{'nfc.tag-success' | translate}}</div>
     <ion-row center [hidden]="!dataReceived">
         <ion-col><strong>Tag key</strong></ion-col>
         <ion-col><strong>Tag value</strong></ion-col>
@@ -19,8 +19,8 @@
     </ion-row>
     <div padding>
         <ion-row>
-            <ion-col width-50><button block type="button" (click)="scanNewTag()" [hidden]="!dataReceived"><ion-icon name="card"></ion-icon> Scan new tag</button></ion-col>
-            <ion-col width-50><button secondary block type="button" (click)="saveTag()" [hidden]="!dataReceived"><ion-icon name="checkmark"></ion-icon> Save tag</button></ion-col>
+            <ion-col width-50><button block type="button" (click)="scanNewTag()" [hidden]="!dataReceived"><ion-icon name="card"></ion-icon>{{'buttons.scan-tag' | translate}}</button></ion-col>
+            <ion-col width-50><button secondary block type="button" (click)="saveTag()" [hidden]="!dataReceived"><ion-icon name="checkmark"></ion-icon>{{'buttons.save-tag' | translate}}</button></ion-col>
         </ion-row>
     </div>
 </ion-content>
