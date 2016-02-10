@@ -7,7 +7,7 @@ import {Page, NavController, Alert} from 'ionic-framework/ionic';
 import {Inject} from 'angular2/core';
 import {FormBuilder, Validators} from 'angular2/common';
 import {NFCPage} from '../nfc/nfc';
-
+import {User,Profile} from '../../classes/user';
 
 @Page({
     templateUrl: 'build/pages/login/login.html'
@@ -15,21 +15,26 @@ import {NFCPage} from '../nfc/nfc';
 export class LoginPage {
     nav:NavController;
     loginForm;
+    user:User;
     // We inject the router via DI
     constructor(@Inject(FormBuilder) form: FormBuilder, @Inject(NavController) nav: NavController) {
         this.nav = nav;
+        this.user = new User();
         this.loginForm = form.group({
             username: ['', Validators.required],
-            password: ['', Validators.required]
+            password: ['', Validators.required],
+            rememberMe: ['', Validators.required]
         });
     }
     login(event:any):void {
         // This will be called when the user clicks on the Login button
         event.preventDefault();
 
-        if (this.loginForm.value.username.toLowerCase() === 'admin' && this.loginForm.value.password === 'admin') {
+        if (this.user.isValid()) {
             this.nav.setRoot(NFCPage);
-            localStorage.setItem('NFC-APP-TOKEN', btoa(this.loginForm.value.username.toLowerCase() + ':' + this.loginForm.value.password.toLowerCase()));
+            this.user.lastConnection = new Date();
+            this.user.role = Profile.ADMIN;
+            localStorage.setItem('NFC-APP-TOKEN', JSON.stringify(this.user));
         } else {
             let alert = Alert.create({
                 title: 'Invalid credentials',
