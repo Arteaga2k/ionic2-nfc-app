@@ -4,6 +4,9 @@ CROSS PLATFORM NFC
 # Presentation
 An NFC Reader application based on ionic2 and TypeScript (ES6)
 
+# Screenshots
+![image](http://i.imgur.com/zHDltDZ.png?2)
+
 # IDE
 IntelliJ v15.0.3 or later is recommended for a better TypeScript support
 
