@@ -11,13 +11,65 @@ IntelliJ v15.0.3 or later is recommended for a better TypeScript support
 
 # Project Structure
 
-# Installed cordova plugins
-- cordova-plugin-barcodescanner
-- cordova-plugin-statusbar
-- cordova-plugin-vibration
-- phonegap-nfc
-- cordova-plugin-whitelist
-
+```
+- app: Application files (TypeScript)
+    -- app.ts: Ionic2 entry point
+    -- classes: Common classes
+    -- pages: Ionic views
+        --- app.html
+        --- login
+            ---- login.ts
+            ---- login.scss
+            ---- login.html
+        --- account
+        --- nfc
+        --- qr
+        --- tags
+    -- pipes: Angular2 @Pipe components
+    -- utils: Utility classes
+- www: Assets folder
+    -- index.html: Entry point
+    -- build (not in git repository): Production folder where sources are minified
+    -- css
+    -- i18n: 18n files
+        --- en.json
+        --- fr.json
+    -- img: Images of the application
+    -- js
+    -- res
+    -- spec: Unit tests folder
+        --- mocks: Cordvoa api mocks
+        --- src
+- typings: TypeScript interfaces for libraries
+    -- cordvoa
+    -- jasmine
+    -- lodash
+    -- moment
+- platforms (not in git repository): Installed platforms (android, ios, etc..) using ```$ionic add platform``` command
+- reports (not in git repository): Unit tests reports
+    -- junit (used by jenkins)
+    -- html
+- node_modules (not in git repository): NPM dependencies
+- plugins (not in git repository): Cordova plugins
+    -- cordova-plugin-barcodescanner
+    -- cordova-plugin-statusbar
+    -- cordova-plugin-vibration
+    -- phonegap-nfc
+    -- cordova-plugin-whitelist
+- ionic.config.js: Ionic configuration file
+- spec-bundle.js: Used for unit tests only with Karma, webpack and ES6
+- karma.conf.js: Karma configuration file for unit tests
+- webpack.config.test.config.js: Build configuration file used for unit tests
+- webpack.config.js: Build configuration file
+- tsconfig.json: TypeScript configuration file
+- tslint.json: TSLint configuration file
+- package.json: For managing npm dependencies
+    -- Scripts: ```$ npm test``` for executing unit tests through karma
+- config.xml: Phonegap configuration file
+- resources: Icons and splash resources for every platforms
+```
+ 
+ 
 # Presentation
 A starting project for ionic2 based on TypeScript
 
