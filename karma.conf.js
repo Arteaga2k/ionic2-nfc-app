@@ -19,7 +19,7 @@ module.exports = function(config) {
         // list of files to exclude
         exclude: [ ],
 
-        reporters: ['junit','html'],
+        reporters: ['junit','html', 'coverage'],
 
         junitReporter: {
             outputDir: 'reports/junit',
@@ -58,7 +58,8 @@ module.exports = function(config) {
             reporters: [
                 { type: 'text-summary' },
                 { type: 'json' },
-                { type: 'html' }
+                { type: 'html' },
+                { type: 'cobertura' }
             ]
         },
 

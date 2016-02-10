@@ -74,6 +74,8 @@ IntelliJ v15.0.3 or later is recommended for a better TypeScript support
 - reports (not in git repository): Unit tests reports
     -- junit (used by jenkins)
     -- html
+- coverage: Coverage reports
+    -- Format text, json ,html and cobertura (for jenkins)
 - node_modules (not in git repository): NPM dependencies
 - plugins (not in git repository): Cordova plugins
     -- cordova-plugin-barcodescanner
