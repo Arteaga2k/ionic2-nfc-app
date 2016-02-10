@@ -114,10 +114,9 @@ To search for typings :
 $ tsd query jasmine
 ```
 
-Add the following typings :
+To add a typing :
 ```bash
 $ tsd add jasmine
-$ tsd add cordova
 ```
 Files will be added to the typings folder. 
 
