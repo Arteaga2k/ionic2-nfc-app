@@ -107,6 +107,10 @@ You need to install the karma command:
 ```bash
 $ npm install -g karma
 ```
+You need to install the cordova command
+```bash
+$ npm install -g cordova
+```
 
 # Typings
 To search for typings :
@@ -132,12 +136,7 @@ For starting the project on desktop:
 $ ionic serve
 ```
 
-# Install cordova command
-```bash
-$ npm install -g cordova
-```
-
-# Install the following plugins
+# Install the following cordova plugins
 Always use cordova (not phonegap) to add a new plugin
 ```bash
 $ cordova plugin add cordova-plugin-barcodescanner
