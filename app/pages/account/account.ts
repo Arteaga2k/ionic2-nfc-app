@@ -2,13 +2,13 @@
  * Account page
  * Created by Michael DESIGAUD on 10/02/2016.
  */
-import {Page} from 'ionic-framework/ionic'
+import {Page, IonicApp} from 'ionic-framework/ionic';
 import {Inject} from 'angular2/core';
 import {FromNowPipe} from '../../pipes/fromNowPipe';
 import {User} from '../../classes/user';
 import {TranslatePipe, TranslateService} from 'ng2-translate/ng2-translate';
-import {IonicApp} from 'ionic-framework/ionic';
 import {Languages} from '../../utils/languages';
+import * as moment from 'moment';
 
 @Page({
     templateUrl: 'build/pages/account/account.html',
@@ -27,8 +27,7 @@ export class AccountPage {
     }
     changeLocale():void {
         console.log('change locale',this.app.lang);
-        this.translate.use(this.app.lang).subscribe(() => {
-            console.log('local changed!');
-        });
+        this.translate.use(this.app.lang);
+        moment.locale(this.app.lang);
     }
 }

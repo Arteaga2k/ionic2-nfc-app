@@ -19,9 +19,8 @@ export class User {
     rememberMe:boolean;
     lastConnection:Date;
     role:Profile;
-    constructor(user?:{lastConnection:string}) {
+    constructor(user?:{lastConnection:string,username:string,password:string,role:Profile}) {
         if(user) {
-            this.lastConnection = new Date(user.lastConnection);
             _.assignIn(this, user);
         }
     }

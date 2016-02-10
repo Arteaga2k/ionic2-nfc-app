@@ -10,7 +10,7 @@ import {DatePipe} from 'angular2/common';
     name: 'stringDate'
 })
 export class StringDatePipe implements PipeTransform {
-    transform(value: number, args: any[]) {
+    transform(value: string, args: any[]) {
         if(value) {
             return new DatePipe().transform(new Date(value),args);
         }

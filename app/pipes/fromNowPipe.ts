@@ -14,7 +14,7 @@ import * as moment from 'moment';
     name: 'fromNow'
 })
 export class FromNowPipe implements PipeTransform {
-    transform(value: number, args: any[]) {
+    transform(value: string|number|Date, args: any[]) {
         if(value) {
             return moment(value).fromNow();
         }
