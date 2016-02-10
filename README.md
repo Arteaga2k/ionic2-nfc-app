@@ -2,7 +2,7 @@ CROSS PLATFORM NFC
 ==========
 
 # Presentation
-A starting project for ionic2 based on TypeScript (ES6)
+An NFC Reader application based on ionic2 and TypeScript (ES6)
 
 # IDE
 IntelliJ v15.0.3 or later is recommended for a better TypeScript support
@@ -10,7 +10,7 @@ IntelliJ v15.0.3 or later is recommended for a better TypeScript support
 # Features
 - Left menu
 - Login
-- Remember me
+- Remember me (user saved in local storage)
 - Scan an nfc tag
 - Save a tag in local storage
 - List all saved tags
