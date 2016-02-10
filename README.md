@@ -167,12 +167,12 @@ Add allow intents in the config.xml files:
 - First you need to retrieve the android sdk, then run the android SDK manager and download the last android version
 - Then you need to configure the ANDROID_HOME environment variable based on the location of your Android SDK folder.
 - You have to add the android platform in ionic
-```bash
+```
 $ ionic platform add android
 ```
 - Plug in your device to your computer via USB
 - Run: 
-```bash
+```
 $ ionic run android
 ```
 - The application should be installed to your device and start automatically.
