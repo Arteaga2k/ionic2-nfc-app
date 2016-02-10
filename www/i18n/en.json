@@ -1,0 +1,36 @@
+{
+  "login":{
+    "username": "Username",
+    "password": "Password",
+    "remember-me": "Remember me"
+  },
+  "nfc":{
+    "title":"NFC Tag Reader",
+    "tap-text":"Tap an NFC tag...",
+    "tag-success":"New tag detected !"
+  },
+  "tag-list":{
+    "title":"Saved tags"
+  },
+  "account":{
+    "title":"My Account",
+    "profile":"Profile",
+    "last-connection":"Last connection",
+    "language":"Language",
+    "french":"French",
+    "english":"English"
+  },
+  "menu":{
+    "logout":"Logout",
+    "close":"Close menu",
+    "read-tag":"Read tag",
+    "saved-tags":"Saved tags",
+    "my-account":"My account"
+  },
+  "buttons":{
+    "login":"Login",
+    "scan-tag":"Scan new tag",
+    "save-tag":"Save"
+  }
+
+}

@@ -5,14 +5,17 @@
 import {Page} from 'ionic-framework/ionic';
 import {Inject, NgZone} from 'angular2/core';
 import {StringDatePipe} from '../../pipes/stringDatePipe';
+import {TranslatePipe, TranslateService} from 'ng2-translate/ng2-translate';
 
 @Page({
     templateUrl: 'build/pages/tags/tags.html',
-    pipes: [StringDatePipe]
+    pipes: [StringDatePipe,TranslatePipe]
 })
 export class TagsPage {
     tags:Array<any>;
-    constructor() {
+    translate:TranslateService;
+    constructor(@Inject(TranslateService) translate: TranslateService) {
+        this.translate = translate;
         this.getTags();
     }
     getTags():void {

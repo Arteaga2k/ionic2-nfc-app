@@ -1,27 +1,34 @@
-import {App, IonicApp, Platform, Keyboard} from 'ionic-framework/ionic';
+import {App, IonicApp, NavController} from 'ionic-framework/ionic';
 import {Inject, Directive, ElementRef, Renderer} from 'angular2/core';
 import {NFCPage} from './pages/nfc/nfc';
 import {LoginPage} from './pages/login/login';
 import {TagsPage} from './pages/tags/tags';
 import {QRPage} from './pages/qr/qr';
 import {AccountPage} from './pages/account/account';
-import {NavController} from 'ionic-framework/ionic';
 import {User} from './classes/user';
+import {TranslateService, TranslatePipe} from 'ng2-translate/ng2-translate';
 
 @App({
   templateUrl: './build/pages/app.html',
+  pipes: [TranslatePipe],
+  providers: [TranslateService],
   config: {} // http://ionicframework.com/docs/v2/api/config/Config/
 })
 export class NfcApp {
   app:IonicApp;
   rootPage;
   pages:Array<any>;
-  constructor(@Inject(IonicApp) app: IonicApp, @Inject(Platform) platform: Platform) {
+  translate:TranslateService;
+  constructor(@Inject(IonicApp) app: IonicApp, @Inject(TranslateService) translate: TranslateService) {
     this.app = app;
+    this.translate = translate;
+
+    this.setTranslateConfig();
+
     this.pages = [
-      {title: 'Read Tag', component: NFCPage, icon: 'card'},
-      {title: 'Saved tags', component: TagsPage, icon: 'list'},
-      {title: 'My account', component: AccountPage, icon: 'person'}
+      {title: 'menu.read-tag', component: NFCPage, icon: 'card'},
+      {title: 'menu.saved-tags', component: TagsPage, icon: 'list'},
+      {title: 'menu.my-account', component: AccountPage, icon: 'person'}
     ];
 
     if (this.isAuthTokenValid()) {
@@ -31,23 +38,17 @@ export class NfcApp {
       this.rootPage = LoginPage;
     }
 
-    platform.ready().then(() => {
-      // The platform is now ready. Note: if this callback fails to fire, follow
-      // the Troubleshooting guide for a number of possible solutions:
-      //
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
-      //
-      // First, let's hide the keyboard accessory bar (only works natively) since
-      // that's a better default:
-      //
-      // Keyboard.setAccessoryBarVisible(false);
-      //
-      // For example, we might change the StatusBar color. This one below is
-      // good for dark backgrounds and light text:
-      // StatusBar.setStyle(StatusBar.LIGHT_CONTENT)
-      //StatusBar.setStyle(StatusBar.LIGHT_CONTENT);
-    });
+    //platform.ready().then(() => {});
+  }
+  setTranslateConfig():void {
+    var userLang = navigator.language.split('-')[0];
+    this.app.lang = /(fr|en)/gi.test(userLang) ? userLang : 'en';
+    this.translate.setDefaultLang('en');
+    this.translate.use(this.app.lang);
+
+    var prefix = 'i18n';
+    var suffix = '.json';
+    this.translate.useStaticFilesLoader(prefix, suffix);
   }
   isAuthTokenValid():boolean {
     let user:User = new User(JSON.parse(localStorage.getItem('NFC-APP-TOKEN')));

@@ -9,16 +9,19 @@ import {LoginPage} from '../../../app/pages/login/login';
 import {NFCPage} from '../../../app/pages/nfc/nfc';
 import {FormBuilder, Validators} from 'angular2/common';
 import {NavController, Alert} from 'ionic-framework/ionic';
+import {TranslatePipe, TranslateService} from 'ng2-translate/ng2-translate';
+import {User,Profile} from '../../../app/classes/user';
 
 describe('Login page unit tests', () => {
     var form:FormBuilder;
     var nav:NavController;
+    var translate:TranslateService;
     var event:any = {};
-    var credentials:any = {value:{username:'admin', password:'admin'}};
+    var credentials:any = {value:{username:'admin', password:'admin', rememberMe: true}};
 
     beforeEach(() => {
         form = jasmine.any(FormBuilder);
-
+        translate = jasmine.any(TranslateService);
         nav = jasmine.any(NavController);
         nav.setRoot = jasmine.createSpy('NavController set root spy').and.callFake((page:{name:String}) => {
             expect(page.name).toBe(NFCPage.name);
@@ -36,7 +39,7 @@ describe('Login page unit tests', () => {
 
         form.group = jasmine.createSpy('Form builder group spy').and.returnValue(credentials);
 
-        let loginPage = new LoginPage( form , nav);
+        let loginPage = new LoginPage( form , nav, translate);
 
         expect(loginPage.nav).toBeDefined();
         expect(loginPage.loginForm).toBeDefined();
@@ -48,11 +51,12 @@ describe('Login page unit tests', () => {
 
         form.group = jasmine.createSpy('Form builder group spy').and.returnValue(credentials);
 
-        let loginPage = new LoginPage( form , nav);
+        let loginPage = new LoginPage( form , nav, translate);
 
         spyOn(localStorage, 'setItem');
+        loginPage.user = new User(credentials.value);
         loginPage.login(event);
-        expect(localStorage.setItem).toHaveBeenCalledWith('NFC-APP-TOKEN', btoa(credentials.value.username.toLowerCase() + ':' + credentials.value.password.toLowerCase()));
+        expect(localStorage.setItem).toHaveBeenCalled();
     });
 
     it('Call login method with wrong credentials', () => {
@@ -60,7 +64,7 @@ describe('Login page unit tests', () => {
         credentials.value.username = 'wrongLogin';
         form.group = jasmine.createSpy('Form builder group spy').and.returnValue(credentials);
 
-        let loginPage = new LoginPage( form , nav);
+        let loginPage = new LoginPage( form , nav, translate);
 
         spyOn(localStorage, 'setItem');
 

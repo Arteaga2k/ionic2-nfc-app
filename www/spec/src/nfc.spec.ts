@@ -9,11 +9,13 @@ import {NFCPage} from '../../../app/pages/nfc/nfc';
 import {NavController, Alert, Platform} from 'ionic-framework/ionic';
 import {NgZone} from 'angular2/core';
 import {CordovaMock} from '../mocks/cordova.mock';
+import {TranslateService} from 'ng2-translate/ng2-translate';
 
 describe('NFC page unit tests', () => {
     let nav:NavController;
     let platform:Platform;
     let zone:NgZone;
+    let translate:TranslateService;
 
     beforeEach(() => {
 
@@ -22,6 +24,7 @@ describe('NFC page unit tests', () => {
          nav = jasmine.any(NavController);
          platform = jasmine.any(Platform);
          zone = jasmine.any(NgZone);
+         translate = jasmine.any(TranslateService);
 
          nav.present = jasmine.createSpy('NavController present spy').and.callFake((alert:Alert) => {
              expect(alert).toBeDefined();
@@ -47,7 +50,7 @@ describe('NFC page unit tests', () => {
 
         spyOn(window.StatusBar,'hide');
 
-        let nfcPage:NFCPage = new NFCPage(nav, platform, zone);
+        let nfcPage:NFCPage = new NFCPage(nav, platform, zone, translate);
 
          expect(nfcPage.nav).toBeDefined();
          expect(nfcPage.zone).toBeDefined();
@@ -59,7 +62,7 @@ describe('NFC page unit tests', () => {
 
         spyOn(window.StatusBar,'hide');
 
-        let nfcPage:NFCPage = new NFCPage(nav, platform, zone);
+        let nfcPage:NFCPage = new NFCPage(nav, platform, zone, translate);
 
         spyOn(nfcPage,'vibrate');
         let tagData = {key:'value'};
@@ -74,7 +77,7 @@ describe('NFC page unit tests', () => {
 
         spyOn(window.StatusBar,'hide');
 
-        let nfcPage:NFCPage = new NFCPage(nav, platform, zone);
+        let nfcPage:NFCPage = new NFCPage(nav, platform, zone, translate);
         window.nfc.sendTag({key:'value'}, () => {
             expect(nfcPage.dataReceived).toBeTruthy();
             nfcPage.scanNewTag();
@@ -86,7 +89,7 @@ describe('NFC page unit tests', () => {
 
         spyOn(window.StatusBar,'hide');
 
-        let nfcPage:NFCPage = new NFCPage(nav, platform, zone);
+        let nfcPage:NFCPage = new NFCPage(nav, platform, zone, translate);
 
         spyOn(localStorage,'getItem').and.callThrough();
 
