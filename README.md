@@ -1,13 +1,33 @@
 CROSS PLATFORM NFC
 ==========
 
+# Presentation
+A starting project for ionic2 based on TypeScript (ES6)
+
 # IDE
 IntelliJ v15.0.3 or later is recommended for a better TypeScript support
 
+# Features
+- Left menu
+- Login
+- Remember me
+- Scan an nfc tag
+- Save a tag in local storage
+- List all saved tags
+- My account
+- Language selection
+- i18n application: French and english with dynamic reload
+- Unit tests
+   
+
 # Stack
-- Angular v2.0.0-beta.3
-- Ionic Framework v2.0.0-alpha.54
-- ZoneJS v0.5.11
+- Angular v2
+- Ionic Framework v2
+- Webpack
+- Karma
+- Jasmine
+- PhantomJS
+- Angular translate v2
 
 # Project Structure
 
@@ -68,10 +88,7 @@ IntelliJ v15.0.3 or later is recommended for a better TypeScript support
 - config.xml: Phonegap configuration file
 - resources: Icons and splash resources for every platforms
 ```
- 
- 
-# Presentation
-A starting project for ionic2 based on TypeScript
+
 
 # Installation
 Install the node dependencies:
