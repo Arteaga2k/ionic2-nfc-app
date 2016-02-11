@@ -61,7 +61,7 @@ module.exports = function(config) {
                 { type: 'json', subdir: 'report-json' },
                 { type: 'html', subdir: 'report-html' },
                 { type: 'cobertura', subdir: 'report-cobertura' },
-                { type: 'lcov', subdir: 'report-lcov' }
+                { type: 'lcovonly', file: 'coverage.lcov' }
             ]
         },
 
