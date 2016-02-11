@@ -60,7 +60,8 @@ module.exports = function(config) {
                 { type: 'text-summary', subdir: 'report-text' },
                 { type: 'json', subdir: 'report-json' },
                 { type: 'html', subdir: 'report-html' },
-                { type: 'cobertura', subdir: 'report-cobertura' }
+                { type: 'cobertura', subdir: 'report-cobertura' },
+                { type: 'lcov', subdir: 'report-lcov' }
             ]
         },
 
