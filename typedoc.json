@@ -1,4 +1,5 @@
 {
+  "name":"Cross Platform NFC",
   "mode": "modules",
   "out": "doc",
   "theme": "default",
@@ -11,5 +12,6 @@
   "stripInternal": "true",
   "suppressExcessPropertyErrors": "true",
   "suppressImplicitAnyIndexErrors": "true",
-  "module": "commonjs"
+  "module": "commonjs",
+  "exclude":"**/*.spec.ts"
 }

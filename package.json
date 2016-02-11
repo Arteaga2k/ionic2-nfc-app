@@ -41,11 +41,13 @@
     "istanbul-instrumenter-loader": "0.1.3",
     "es6-promise-loader": "^1.0.1",
     "json-loader":"^0.5.4",
-    "raw-loader":"0.5.1"
+    "raw-loader":"0.5.1",
+    "tsconfig-lint":"^0.5.0"
   },
   "scripts": {
     "test": "karma start",
-    "docs": "typedoc --json typedoc.json --exclude **/*.spec.ts app"
+    "docs": "typedoc --options typedoc.json app/app.ts",
+    "quality": "tsconfig-lint"
   },
   "name": "crossplatformnfc",
   "author": "Michael Desigaud <michael.desigaud@redfroggy.fr>",
