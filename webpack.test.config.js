@@ -60,7 +60,7 @@ module.exports = {
             // instrument only testing sources with Istanbul
             {
                 test: /\.(js|ts)$/,
-                include: root('src'),
+                include: root('app'),
                 loader: 'istanbul-instrumenter-loader',
                 exclude: [
                     /\.(e2e|spec)\.ts$/,
