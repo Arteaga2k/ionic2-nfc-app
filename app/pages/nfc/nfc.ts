@@ -8,6 +8,9 @@
 import {Page, NavController, Platform, Alert} from 'ionic-framework/ionic';
 import {Inject, NgZone} from 'angular2/core';
 import {TranslatePipe, TranslateService} from 'ng2-translate/ng2-translate';
+import {DOM} from 'angular2/src/platform/dom/dom_adapter';
+
+const NDEF_TYPE:string = 'ndef';
 
 
 @Page({
@@ -16,44 +19,59 @@ import {TranslatePipe, TranslateService} from 'ng2-translate/ng2-translate';
     pipes: [TranslatePipe]
 })
 export class NFCPage {
-    tagInfos:Array<any>;
-    tag:any;
+    tagEvent:Event;
     dataReceived:boolean;
+    showAnimation:boolean = false;
     zone:NgZone;
     nav:NavController;
     translate:TranslateService;
     constructor(@Inject(NavController) nav: NavController,@Inject(Platform) platform: Platform, @Inject(NgZone) zone: NgZone, @Inject(TranslateService) translate: TranslateService) {
         this.nav = nav;
         this.zone = zone;
-        this.tagInfos = [];
         this.dataReceived = false;
         this.translate = translate;
+
         platform.ready().then(() => {
             if(window.StatusBar) {
                 StatusBar.hide();
             }
             this.addNfcListeners();
+
+            document.getElementById('successImage').addEventListener('animationend',() => {
+                console.log(this.tagEvent);
+                if(this.tagEvent.type === NDEF_TYPE) {
+                    this.readNDEFTag();
+                }
+            });
         });
     }
     addNfcListeners():void {
-        var self = this;
-        nfc.addTagDiscoveredListener((tagEvent:any) => {
-            self.zone.run(() => {
-                self.readTagData(tagEvent);
-            });
-        }, () => {
-            console.log('Listening for NFC Tag');
+        nfc.addTagDiscoveredListener((tagEvent:Event) => {
+            this.tagListenerSuccess(tagEvent);
+        });
+        nfc.addNdefListener((tagEvent:Event) => {
+            this.tagListenerSuccess(tagEvent);
         });
     }
-    readTagData(tagEvent:any):void {
-        let data:Array<any> = [];
-        Object.keys(tagEvent.tag).forEach((key) => {
-            data.push({key: key, value: tagEvent.tag[key]});
+    tagListenerSuccess(tagEvent:Event) {
+        this.zone.run(()=>{
+            this.tagEvent = tagEvent;
+            this.showAnimation = true;
+            this.vibrate(2000);
         });
-        this.tag = tagEvent.tag;
-        this.tagInfos = data;
+
+    }
+    readNDEFTag():void {
+        /*let data:Array<any> = [];
+        Object.keys(this.tag).forEach((key) => {
+            data.push({key: key, value: this.tag[key]});
+        });
+        if (this.tag.ndefMessage && this.tag.ndefMessage[0].payload) {
+            this.tagPayload = String.fromCharCode.apply(String, this.tag.ndefMessage[0].payload);
+        }
+        this.tagInfos = data;*/
+        console.log('readNdefTag');
         this.dataReceived = true;
-        this.vibrate(2000);
     }
     vibrate(time:number):void {
         if(navigator.vibrate) {
@@ -62,6 +80,7 @@ export class NFCPage {
     }
     scanNewTag():void {
         this.dataReceived = false;
+        this.showAnimation = false;
     }
     saveTag():void {
         if(this.tag.id) {

@@ -6,7 +6,7 @@
   },
   "nfc":{
     "title":"NFC Tag Reader",
-    "tap-text":"Scanner un tag NFC...",
+    "tap-text":"Scanner un tag NFC",
     "tag-success":"Nouveau tag détecté!"
   },
   "tag-list":{

@@ -2,25 +2,40 @@
     <button menuToggle>
         <ion-icon name='menu'></ion-icon>
     </button>
-    <ion-title>{{'nfc.title' | translate}}</ion-title>
+    <ion-title>{{'nfc.tap-text' | translate}}</ion-title>
 </ion-navbar>
 <ion-content padding class="has-header" align="center">
-    <img src="img/nfc.png" class="nfc-image" alt="" [hidden]="dataReceived">
-    <img src="img/nfc_success.png" class="nfc-success-image" alt="" [hidden]="!dataReceived">
-    <div [hidden]="dataReceived">{{'nfc.tap-text' | translate}}</div>
-    <div [hidden]="!dataReceived">{{'nfc.tag-success' | translate}}</div>
-    <ion-row center [hidden]="!dataReceived">
+    <div class="row row-center">
+        <div class="col">
+            <img src="img/nfc_black.jpg" class="nfc-image" alt="" [hidden]="showAnimation">
+            <img src="img/nfc.jpg" id="successImage" class="nfc-success-image" alt="" [hidden]="!showAnimation">
+        </div>
+    </div>
+    <!--<div [hidden]="dataReceived"></div>
+    <div [hidden]="!dataReceived">{{'nfc.tag-success' | translate}}</div>-->
+    <!--<div [hidden]="!dataReceived" padding>Payload: {{tagPayload}}</div><br/>-->
+    <!--<ion-row center [hidden]="!dataReceived">
         <ion-col><strong>Tag key</strong></ion-col>
         <ion-col><strong>Tag value</strong></ion-col>
     </ion-row>
     <ion-row center *ngFor='#tagInfo of tagInfos' [hidden]="!dataReceived">
         <ion-col>{{tagInfo.key}}</ion-col>
         <ion-col>{{tagInfo.value}}</ion-col>
-    </ion-row>
-    <div padding>
+    </ion-row>-->
+    <ion-list>
+        <ion-item *ngFor='#tagInfo of tagInfos' [hidden]="!dataReceived">
+            <ion-avatar item-left>
+                <img src="img/nfc_tag.jpg" width="36" height="36">
+            </ion-avatar>
+            <h2>Finn</h2>
+            <h3>{{tagPayload}}</h3>
+            <p>I've had a pretty messed up day. If we just...</p>
+        </ion-item>
+    </ion-list>
+    <!--<div padding>
         <ion-row>
             <ion-col width-50><button block type="button" (click)="scanNewTag()" [hidden]="!dataReceived"><ion-icon name="card"></ion-icon>{{'buttons.scan-tag' | translate}}</button></ion-col>
             <ion-col width-50><button secondary block type="button" (click)="saveTag()" [hidden]="!dataReceived"><ion-icon name="checkmark"></ion-icon>{{'buttons.save-tag' | translate}}</button></ion-col>
         </ion-row>
-    </div>
+    </div>-->
 </ion-content>
