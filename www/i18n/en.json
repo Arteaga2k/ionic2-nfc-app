@@ -31,6 +31,19 @@
     "login":"Login",
     "scan-tag":"Scan new tag",
     "save-tag":"Save"
+  },
+  "codes":{
+    "tags":{
+      "type":"Type",
+      "id": "Id",
+      "canMakeReadOnly":"Can be set as read only",
+      "writable":"Writable",
+      "maxSize":"Maximum size",
+      "techTypes":"Technical type",
+      "header":"Header",
+      "record":"Record",
+      "payload":"Payload"
+    }
   }
 
 }

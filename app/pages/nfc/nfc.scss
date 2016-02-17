@@ -18,7 +18,7 @@
   position: relative;
   height: 125px;
   width: 125px;
-  animation: floatBubble 1s 1 normal ease-out;
+  top: 0px;
 }
 
 @keyframes blink {
@@ -30,23 +30,5 @@
   }
   100% {
     opacity: 1;
-  }
-}
-
-@keyframes floatBubble {
-  0% {
-    height: 250px;
-    width: 250px;
-    top:500px;
-  }
-  50% {
-    height: 187px;
-    width: 187px;
-    top:250px;
-  }
-  100% {
-    top: 0px;
-    width: 125px;
-    height: 125px;
   }
 }

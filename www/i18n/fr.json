@@ -31,5 +31,18 @@
     "login":"Login",
     "scan-tag":"Scanner",
     "save-tag":"Sauver"
+  },
+  "codes":{
+    "tags":{
+      "type":"Type",
+      "id": "Id",
+      "canMakeReadOnly":"Mode lecture seule possible",
+      "writable":"Ecriture",
+      "maxSize":"Taille maximum",
+      "techTypes":"Type technique",
+      "header":"En tête",
+      "record":"Message",
+      "payload":"Données"
+    }
   }
 }
