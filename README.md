@@ -74,8 +74,9 @@ IntelliJ v15.0.3 or later is recommended for a better TypeScript support
 - reports (not in git repository): Unit tests reports
     -- junit (used by jenkins)
     -- html
-- coverage: Coverage reports
-    -- Format text, json ,html and cobertura (for jenkins)
+- coverage (not in git repository): Coverage reports
+    -- Format text, json ,html and cobertura (xml)
+- doc (not in git repository): Generated TypeScript documentation
 - node_modules (not in git repository): NPM dependencies
 - plugins (not in git repository): Cordova plugins
     -- cordova-plugin-barcodescanner
@@ -186,10 +187,6 @@ $ ionic run android
 - If you've got a "wrong api version" error, then edit the config.xml file in the source project and change 
 the android preference: android-minSdkVersion
 
-# Quality code
-TSLint checks TypeScript code for errors, readability and maintainability.
-tslint.json is the configuration file for TSLint
-
 # TypeScript compilation in IntelliJ v older than 15.0.3
 - First, read this link: https://www.jetbrains.com/idea/help/transpiling-typescript-to-javascript.html
 - Basically you need to:
@@ -231,6 +228,16 @@ Tests file are under www/spec folder with suffix .spec.ts
 
 To run tests: 
 ```bash
-$ npm test
+$ npm run test
 ```
 Generate reports in junit and HTML.
+
+To run test in browser mode, edit the karma.conf.js file and set 'singleRun' property to false
+
+# Quality code
+TSLint checks TypeScript code for errors, readability and maintainability.
+tslint.json is the configuration file for TSLint
+To run TSLint:
+```bash
+$ npm run quality
+```

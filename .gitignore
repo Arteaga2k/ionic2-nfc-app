@@ -5,6 +5,7 @@ plugins/
 .idea/
 reports/
 coverage/
+doc/
 *.iml
 app/**/*.js
 app/**/*.js.map
