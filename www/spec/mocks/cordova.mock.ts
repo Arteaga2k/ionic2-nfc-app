@@ -12,14 +12,17 @@ class StatusBarMock implements StatusBar {
 }
 
 class NFCMock {
-    tag:Object;
+    tag:any;
     callback;
     addTagDiscoveredListener(callback):void {
         this.callback = callback;
     }
-    sendTag(tagData,successCallback):void {
-        this.tag = tagData;
-        this.callback({tag:this.tag}, null);
+    addNdefListener(callback):void {
+        this.callback = callback;
+    }
+    sendTag(tagEvent:{type:string,tag:any},successCallback):void {
+        this.tag = tagEvent.tag;
+        this.callback(tagEvent, null);
         successCallback();
     }
 }

@@ -13,6 +13,10 @@
   },
   "files": [
     "app/app.ts",
+    "app/pages/account/account.ts",
+    "app/pages/login/login.ts",
+    "app/pages/nfc/nfc.ts",
+    "app/pages/tags/tags.ts",
     "app/pipes/stringDatePipe.ts",
     "app/pipes/fromNowPipe.ts"
   ],

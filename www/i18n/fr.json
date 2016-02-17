@@ -6,7 +6,7 @@
   },
   "nfc":{
     "title":"NFC Tag Reader",
-    "tap-text":"Scanner un tag NFC...",
+    "tap-text":"Scanner un tag NFC",
     "tag-success":"Nouveau tag détecté!"
   },
   "tag-list":{
@@ -31,5 +31,18 @@
     "login":"Login",
     "scan-tag":"Scanner",
     "save-tag":"Sauver"
+  },
+  "codes":{
+    "tags":{
+      "type":"Type",
+      "id": "Id",
+      "canMakeReadOnly":"Mode lecture seule possible",
+      "writable":"Ecriture",
+      "maxSize":"Taille maximum",
+      "techTypes":"Type technique",
+      "header":"En tête",
+      "record":"Message",
+      "payload":"Données"
+    }
   }
 }
