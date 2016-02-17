@@ -6,7 +6,7 @@ An NFC Reader application based on ionic2 and TypeScript (ES6)
 
 # Screenshots
 ![image](http://i.imgur.com/zHDltDZ.png?2)
-![image](http://i.imgur.com/KPvSZ9h.png?1)
+![image](http://i.imgur.com/e3PT0fC.png?1)
 ![image](http://i.imgur.com/PL38LTB.png?1)
 
 # IDE
