@@ -128,7 +128,7 @@ $ tsd query jasmine
 
 To add a typing :
 ```bash
-$ tsd add jasmine
+$ tsd install jasmine
 ```
 Files will be added to the typings folder. 
 
