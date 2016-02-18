@@ -50,6 +50,7 @@
     "docs": "typedoc --options typedoc.json app/app.ts",
     "quality": "tsconfig-lint"
   },
+  "engines" : { "node" : ">=4.2.2", "npm" : ">=3.3.9" },
   "name": "crossplatformnfc",
   "author": "Michael Desigaud <michael.desigaud@redfroggy.fr>",
   "description": "crossPlatformNfc: An Ionic project",
