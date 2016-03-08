@@ -8,7 +8,7 @@ import {describe, expect, it, xit, inject, beforeEachProviders} from 'angular2/t
 import {LoginPage} from '../../../app/pages/login/login';
 import {NFCPage} from '../../../app/pages/nfc/nfc';
 import {FormBuilder, Validators} from 'angular2/common';
-import {NavController, Alert} from 'ionic-framework/ionic';
+import {NavController, Alert} from 'ionic-framework/index';
 import {TranslatePipe, TranslateService} from 'ng2-translate/ng2-translate';
 import {User,Profile} from '../../../app/classes/user';
 
