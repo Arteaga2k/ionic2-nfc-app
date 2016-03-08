@@ -45,9 +45,9 @@ module.exports = {
                 },
                 exclude: [ /\.e2e\.ts$/,root('node_modules') ]
             },
-            { test: /\.json$/, loader: 'json-loader',exclude: [ root('src/index.html'), root('node_modules') ]  },
-            { test: /\.html$/, loader: 'raw-loader',exclude: [ root('src/index.html'), root('node_modules') ]  },
-            { test: /\.css$/,  loader: 'raw-loader',exclude: [ root('src/index.html'), root('node_modules') ]  }
+            { test: /\.json$/, loader: 'json-loader',exclude: [ root('www/index.html'), root('node_modules') ]  },
+            { test: /\.html$/, loader: 'raw-loader',exclude: [ root('www/index.html'), root('node_modules') ]  },
+            { test: /\.css$/,  loader: 'raw-loader',exclude: [ root('www/index.html'), root('node_modules') ]  }
         ],
         postLoaders: [
             // instrument only testing sources with Istanbul
@@ -83,7 +83,7 @@ module.exports = {
     tslint: {
         emitErrors: false,
         failOnHint: false,
-        resourcePath: 'src'
+        resourcePath: 'app'
     }
 };
 
