@@ -2,26 +2,20 @@
   "compilerOptions": {
     "target": "ES5",
     "module": "commonjs",
-    "noEmitOnError": false,
-    "rootDir": ".",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "sourceMap": false,
-    "sourceRoot": "",
-    "inlineSourceMap": false,
-    "inlineSources": false
+    "sourceMap": true
   },
-  "files": [
-    "app/app.ts",
-    "app/pages/account/account.ts",
-    "app/pages/login/login.ts",
-    "app/pages/nfc/nfc.ts",
-    "app/pages/tags/tags.ts",
-    "app/pipes/stringDatePipe.ts",
-    "app/pipes/fromNowPipe.ts"
-  ],
   "exclude": [
     "node_modules"
   ],
-  "compileOnSave": false
+  "filesGlob": [
+    "./app/**/*.ts",
+    "./www/spec/**/*.ts",
+    "!./node_modules/**/*.ts",
+    "!./platforms/**/*.ts",
+    "!./typings/**/*.ts"
+  ],
+  "compileOnSave": false,
+  "buildOnSave": false
 }
