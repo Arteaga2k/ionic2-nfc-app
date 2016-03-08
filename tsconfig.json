@@ -7,14 +7,14 @@
     "sourceMap": true
   },
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "typings",
+    "platforms"
   ],
   "filesGlob": [
     "./app/**/*.ts",
     "./www/spec/**/*.ts",
-    "!./node_modules/**/*.ts",
-    "!./platforms/**/*.ts",
-    "!./typings/**/*.ts"
+    "!./node_modules/**/*.ts"
   ],
   "compileOnSave": false,
   "buildOnSave": false
