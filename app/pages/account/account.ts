@@ -2,7 +2,7 @@
  * Account page
  * Created by Michael DESIGAUD on 10/02/2016.
  */
-import {Page, IonicApp} from 'ionic-framework/ionic';
+import {Page, IonicApp} from 'ionic-framework/index';
 import {Inject} from 'angular2/core';
 import {FromNowPipe} from '../../pipes/fromNowPipe';
 import {User} from '../../classes/user';

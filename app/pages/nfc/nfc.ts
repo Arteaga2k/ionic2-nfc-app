@@ -5,14 +5,11 @@
 
 ///<reference path="../../../typings/cordova/cordova.d.ts" />
 
-import {Page, NavController, Platform, Alert} from 'ionic-framework/ionic';
+import {Page, NavController, Platform, Alert} from 'ionic-framework/index';
 import {Inject, NgZone} from 'angular2/core';
 import {TranslatePipe, TranslateService} from 'ng2-translate/ng2-translate';
 import {DOM} from 'angular2/src/platform/dom/dom_adapter';
 import {TagUtil,Tag} from '../../classes/tag';
-
-
-
 
 @Page({
     templateUrl: './build/pages/nfc/nfc.html',

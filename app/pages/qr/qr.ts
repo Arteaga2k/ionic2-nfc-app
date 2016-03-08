@@ -3,7 +3,7 @@
  * Created by Michael DESIGAUD on 04/02/2016.
  */
 
-import {Page, Platform} from 'ionic-framework/ionic';
+import {Page, Platform} from 'ionic-framework/index';
 import {Inject, NgZone} from 'angular2/core';
 
 
