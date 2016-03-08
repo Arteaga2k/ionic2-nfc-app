@@ -1,17 +1,22 @@
-import {App, IonicApp, NavController} from 'ionic-framework/ionic';
-import {Inject, Directive, ElementRef, Renderer} from 'angular2/core';
+import {App, IonicApp, NavController,} from 'ionic-framework/index';
+import {Inject, Directive, ElementRef, Renderer, provide} from 'angular2/core';
+import {Http} from 'angular2/http';
 import {NFCPage} from './pages/nfc/nfc';
 import {LoginPage} from './pages/login/login';
 import {TagsPage} from './pages/tags/tags';
 import {QRPage} from './pages/qr/qr';
 import {AccountPage} from './pages/account/account';
 import {User} from './classes/user';
-import {TranslateService, TranslatePipe} from 'ng2-translate/ng2-translate';
+import {TranslateService, TranslatePipe, TranslateLoader, TranslateStaticLoader} from 'ng2-translate/ng2-translate';
 
 @App({
   templateUrl: './build/pages/app.html',
   pipes: [TranslatePipe],
-  providers: [TranslateService],
+  providers: [TranslateService,
+  provide(TranslateLoader, {
+    useFactory: (http:Http) => new TranslateStaticLoader(http,'i18n', '.json'),
+    deps: [Http]
+  })],
   config: {} // http://ionicframework.com/docs/v2/api/config/Config/
 })
 export class NfcApp {
@@ -19,11 +24,11 @@ export class NfcApp {
   rootPage;
   pages:Array<any>;
   translate:TranslateService;
-  constructor(@Inject(IonicApp) app: IonicApp, @Inject(TranslateService) translate: TranslateService) {
+  constructor(@Inject(IonicApp) app: IonicApp, @Inject(TranslateService) translate: TranslateService,@Inject(Http) http:Http) {
     this.app = app;
     this.translate = translate;
 
-    this.setTranslateConfig();
+    this.setTranslateConfig(http);
 
     this.pages = [
       {title: 'menu.read-tag', component: NFCPage, icon: 'card'},
@@ -40,15 +45,11 @@ export class NfcApp {
 
     //platform.ready().then(() => {});
   }
-  setTranslateConfig():void {
+  setTranslateConfig(http:Http):void {
     var userLang = navigator.language.split('-')[0];
     this.app.lang = /(fr|en)/gi.test(userLang) ? userLang : 'en';
     this.translate.setDefaultLang('en');
     this.translate.use(this.app.lang);
-
-    var prefix = 'i18n';
-    var suffix = '.json';
-    this.translate.useStaticFilesLoader(prefix, suffix);
   }
   isAuthTokenValid():boolean {
     let user:User = new User(JSON.parse(localStorage.getItem('NFC-APP-TOKEN')));

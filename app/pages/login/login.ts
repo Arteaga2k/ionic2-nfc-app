@@ -3,7 +3,7 @@
  * Created by Michael DESIGAUD on 02/02/2016.
  */
 
-import {Page, NavController, Alert} from 'ionic-framework/ionic';
+import {Page, NavController, Alert} from 'ionic-framework/index';
 import {Inject} from 'angular2/core';
 import {FormBuilder, Validators} from 'angular2/common';
 import {NFCPage} from '../nfc/nfc';
