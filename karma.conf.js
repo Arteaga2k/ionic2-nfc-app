@@ -41,7 +41,7 @@ module.exports = function(config) {
 
         // list of files / patterns to load in the browser
         // we are building the test environment in ./spec-bundle.js
-        // {pattern:'app/**/*.html'}
+        // {pattern:'app/**/*.html'}npm tes
         files: [{ pattern: 'spec-bundle.js', watched: false }],
 
         // preprocess matching files before serving them to the browser
