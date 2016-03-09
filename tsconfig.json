@@ -11,10 +11,6 @@
     "typings",
     "platforms"
   ],
-  "files": [
-    "./app/**/*.ts",
-    "./www/spec/**/*.ts"
-  ],
   "compileOnSave": false,
   "buildOnSave": false
 }
