@@ -13,11 +13,10 @@ var ENV = process.env.ENV = process.env.NODE_ENV = 'test';
  * Config
  */
 module.exports = {
-    resolve: {
-        cache: false,
-        extensions: prepend(['.ts','.js','.json','.css','.html'], '.async') // ensure .async.ts etc also works
-    },
     devtool: 'inline-source-map',
+    resolve: {
+        extensions: ['', '.ts', '.js']
+    },
     module: {
         preLoaders: [
             {
@@ -37,24 +36,18 @@ module.exports = {
         ],
         loaders: [
             {
-                test: /\.async\.ts$/,
-                loaders: ['es6-promise-loader', 'ts-loader'],
-                exclude: [ /\.(spec|e2e)\.ts$/ ]
-            },
-            {
                 test: /\.ts$/,
                 loader: 'ts-loader',
                 query: {
                     "compilerOptions": {
-                        "noEmitHelpers": true,
-                        "removeComments": true,
+                        "removeComments": true
                     }
                 },
-                exclude: [ /\.e2e\.ts$/ ]
+                exclude: [ /\.e2e\.ts$/,root('node_modules') ]
             },
-            { test: /\.json$/, loader: 'json-loader' },
-            { test: /\.html$/, loader: 'raw-loader' },
-            { test: /\.css$/,  loader: 'raw-loader' }
+            { test: /\.json$/, loader: 'json-loader',exclude: [ root('www/index.html'), root('node_modules') ]  },
+            { test: /\.html$/, loader: 'raw-loader',exclude: [ root('www/index.html'), root('node_modules') ]  },
+            { test: /\.css$/,  loader: 'raw-loader',exclude: [ root('www/index.html'), root('node_modules') ]  }
         ],
         postLoaders: [
             // instrument only testing sources with Istanbul
@@ -67,14 +60,8 @@ module.exports = {
                     /node_modules/
                 ]
             }
-        ],
-        noParse: [
-            root('zone.js/dist'),
-            root('angular2/bundles')
         ]
     },
-    stats: { colors: true, reasons: true },
-    debug: false,
     plugins: [
         new DefinePlugin({
             // Environment helpers
@@ -82,15 +69,6 @@ module.exports = {
                 'ENV': JSON.stringify(ENV),
                 'NODE_ENV': JSON.stringify(ENV)
             }
-        }),
-        new ProvidePlugin({
-            // TypeScript helpers
-            '__metadata': 'ts-helper/metadata',
-            '__decorate': 'ts-helper/decorate',
-            '__awaiter': 'ts-helper/awaiter',
-            '__extends': 'ts-helper/extends',
-            '__param': 'ts-helper/param',
-            'Reflect': 'es7-reflect-metadata/src/global/browser'
         })
     ],
     // we need this due to problems with es6-shim
@@ -109,19 +87,4 @@ module.exports = {
 function root(args) {
     args = Array.prototype.slice.call(arguments, 0);
     return path.join.apply(path, [__dirname].concat(args));
-}
-
-function rootNode(args) {
-    args = Array.prototype.slice.call(arguments, 0);
-    return root.apply(path, ['node_modules'].concat(args));
-}
-
-function prepend(extensions, args) {
-    args = args || [];
-    if (!Array.isArray(args)) { args = [args] }
-    return extensions.reduce(function(memo, val) {
-        return memo.concat(val, args.map(function(prefix) {
-            return prefix + val
-        }));
-    }, ['']);
 }
