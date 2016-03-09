@@ -79,11 +79,6 @@ module.exports = {
         module: false,
         clearImmediate: false,
         setImmediate: false
-    },
-    tslint: {
-        emitErrors: false,
-        failOnHint: false,
-        resourcePath: 'app'
     }
 };
 
