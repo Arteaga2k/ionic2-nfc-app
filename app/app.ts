@@ -1,5 +1,5 @@
-import {App, IonicApp, NavController,} from 'ionic-framework/index';
-import {Inject, Directive, ElementRef, Renderer, provide} from 'angular2/core';
+import {App, IonicApp, NavController,Menu} from 'ionic-framework/index';
+import {Inject, Directive, ElementRef, Renderer, provide, Type} from 'angular2/core';
 import {Http} from 'angular2/http';
 import {NFCPage} from './pages/nfc/nfc';
 import {LoginPage} from './pages/login/login';
@@ -13,15 +13,16 @@ import {TranslateService, TranslatePipe, TranslateLoader, TranslateStaticLoader}
   templateUrl: './build/pages/app.html',
   pipes: [TranslatePipe],
   providers: [TranslateService,
-  provide(TranslateLoader, {
-    useFactory: (http:Http) => new TranslateStaticLoader(http,'i18n', '.json'),
-    deps: [Http]
-  })],
+    provide(TranslateLoader, {
+      useFactory: (http:Http) => new TranslateStaticLoader(http,'i18n', '.json'),
+      deps: [Http]
+    })
+  ],
   config: {} // http://ionicframework.com/docs/v2/api/config/Config/
 })
 export class NfcApp {
   app:IonicApp;
-  rootPage;
+  rootPage:Type;
   pages:Array<any>;
   translate:TranslateService;
   constructor(@Inject(IonicApp) app: IonicApp, @Inject(TranslateService) translate: TranslateService,@Inject(Http) http:Http) {

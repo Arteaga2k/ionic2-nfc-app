@@ -20,6 +20,7 @@ export class User {
     lastConnection:Date;
     role:Profile;
     constructor(user?:{lastConnection:string,username:string,password:string,role:Profile}) {
+        this.rememberMe = false;
         if(user) {
             _.assignIn(this, user);
         }
