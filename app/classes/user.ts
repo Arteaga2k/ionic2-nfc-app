@@ -25,11 +25,6 @@ export class User {
             _.assignIn(this, user);
         }
     }
-    isValid():boolean {
-        return this.username && this.password
-        && this.username.toLowerCase() === 'admin'
-            && this.password.toLowerCase() === 'admin';
-    }
     getProfile():string {
         return Profile[this.role];
     }

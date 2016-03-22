@@ -20,14 +20,13 @@ import {Response} from 'angular2/http';
 export class LoginPage {
     nav:NavController;
     loginForm;
-    user:User;
+    rememberMe = false;
     translate: TranslateService;
     // We inject the router via DI
     constructor(@Inject(FormBuilder) form: FormBuilder, @Inject(NavController) nav: NavController,
                 @Inject(TranslateService) translate: TranslateService,
                 @Inject(LoginService) private loginService:LoginService) {
         this.nav = nav;
-        this.user = new User();
         this.translate = translate;
         this.loginForm = form.group({
             username: ['', Validators.required],
@@ -35,25 +34,30 @@ export class LoginPage {
             rememberMe: ['', Validators.required]
         });
     }
-    login(event:Event):void {
+    login(event:Event,username:string,password:string,rememberMe:boolean):void {
         // This will be called when the user clicks on the Login button
         event.preventDefault();
 
-        this.loginService.authenticate(this.user.username,this.user.password).subscribe((loginData:any) => {
-            this.user = new User(loginData);
-            this.user.lastConnection = new Date();
-            console.log('Login successful',this.user);
-            this.nav.setRoot(NFCPage);
-
-            localStorage.setItem('NFC-APP-TOKEN', JSON.stringify(this.user));
-        }, err => {
-            console.log('Login failed',err);
+        if(username.toLowerCase() !== 'admin' || password.toLowerCase() !== 'admin') {
             let alert = Alert.create({
                 title: 'Invalid credentials',
                 subTitle: 'You entered invalid credentials !',
                 buttons: ['Ok']
             });
             this.nav.present(alert);
-        });
+        } else {
+
+            this.loginService.authenticate(username, password).subscribe((loginData:any) => {
+                let user:User = new User(loginData);
+                user.lastConnection = new Date();
+                console.log('Login successful', user);
+                this.nav.setRoot(NFCPage);
+
+                if (rememberMe) {
+                    console.log('Remember me: Store user to local storage');
+                    localStorage.setItem('NFC-APP-TOKEN', JSON.stringify(user));
+                }
+            });
+        }
     }
 }

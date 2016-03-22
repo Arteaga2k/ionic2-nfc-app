@@ -4,6 +4,7 @@
  */
 
 ///<reference path="../../../typings/cordova/cordova.d.ts" />
+///<reference path="../../../typings/phonegap-nfc/phonegap-nfc.d.ts" />
 
 import {Page, NavController, Platform, Alert} from 'ionic-framework/index';
 import {Inject, NgZone} from 'angular2/core';
