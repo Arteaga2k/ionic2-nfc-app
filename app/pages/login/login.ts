@@ -19,16 +19,10 @@ import {StorageUtils} from '../../utils/storage.utils';
     pipes: [TranslatePipe]
 })
 export class LoginPage {
-    nav:NavController;
     loginForm;
     rememberMe = false;
-    translate: TranslateService;
     // We inject the router via DI
-    constructor(@Inject(FormBuilder) form: FormBuilder, @Inject(NavController) nav: NavController,
-                @Inject(TranslateService) translate: TranslateService,
-                @Inject(LoginService) private loginService:LoginService) {
-        this.nav = nav;
-        this.translate = translate;
+    constructor(form: FormBuilder, private nav: NavController, private translate: TranslateService, private loginService:LoginService) {
         this.loginForm = form.group({
             username: ['', Validators.required],
             password: ['', Validators.required],
@@ -39,26 +33,10 @@ export class LoginPage {
         // This will be called when the user clicks on the Login button
         event.preventDefault();
 
-        if(username.toLowerCase() !== 'admin' || password.toLowerCase() !== 'admin') {
-            let alert = Alert.create({
-                title: 'Invalid credentials',
-                subTitle: 'You entered invalid credentials !',
-                buttons: ['Ok']
-            });
-            this.nav.present(alert);
-        } else {
-
-            this.loginService.authenticate(username, password).subscribe((loginData:any) => {
-                let user:User = new User(loginData);
-                user.lastConnection = new Date();
-                console.log('Login successful', user);
-                this.nav.setRoot(NFCPage);
-
-                if (rememberMe) {
-                    console.log('Remember me: Store user to local storage');
-                    StorageUtils.setToken(user);
-                }
-            });
-        }
+        this.loginService.doLogin(username,password,rememberMe).subscribe(() => {
+            this.nav.setRoot(NFCPage);
+        },(alert:Alert) => {
+           this.nav.present(alert);
+        });
     }
 }

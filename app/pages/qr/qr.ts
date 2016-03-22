@@ -12,13 +12,9 @@ import {Inject, NgZone} from 'angular2/core';
 })
 export class QRPage {
     dataReceived:boolean;
-    zone:NgZone;
-    platform:Platform;
     data:any;
-    constructor(@Inject(Platform) platform: Platform, @Inject(NgZone) zone: NgZone) {
+    constructor(private platform: Platform, private zone: NgZone) {
         this.dataReceived = false;
-        this.zone = zone;
-        this.platform = platform;
         this.data = {};
         platform.ready().then(() => {
             if(window.StatusBar) {

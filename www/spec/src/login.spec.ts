@@ -39,7 +39,7 @@ describe('Login page unit tests', () => {
             expect(alert.data.title).toBe('Invalid credentials');
         });
 
-        loginService.authenticate = jasmine.createSpy('LoginService authenticate').and.callFake((username:string,password:string) => {
+        loginService.doLogin = jasmine.createSpy('LoginService authenticate').and.callFake((username:string,password:string) => {
             expect(username).toBeDefined();
             expect(password).toBeDefined();
             return Observable.of({id:1,username:'admin',role:'ADMIN'});
@@ -54,7 +54,6 @@ describe('Login page unit tests', () => {
 
         let loginPage = new LoginPage( form , nav, translate,loginService);
 
-        expect(loginPage.nav).toBeDefined();
         expect(loginPage.loginForm).toBeDefined();
         expect(form.group).toHaveBeenCalled();
         expect(loginPage.loginForm).toEqual(credentials);
@@ -66,19 +65,6 @@ describe('Login page unit tests', () => {
 
         let loginPage = new LoginPage( form , nav, translate,loginService);
 
-        spyOn(StorageUtils, 'setToken');
         loginPage.login(event,credentials.value.username,credentials.value.password,true);
-        expect(StorageUtils.setToken).toHaveBeenCalled();
-    });
-
-    it('Call login method with correct credentials and without remember me', () => {
-
-        form.group = jasmine.createSpy('Form builder group spy').and.returnValue(credentials);
-
-        let loginPage = new LoginPage( form , nav, translate,loginService);
-
-        spyOn(StorageUtils, 'setToken');
-        loginPage.login(event,credentials.value.username,credentials.value.password,false);
-        expect(StorageUtils.setToken).not.toHaveBeenCalled();
     });
 });
