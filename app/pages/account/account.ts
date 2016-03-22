@@ -9,6 +9,7 @@ import {User} from '../../classes/user';
 import {TranslatePipe, TranslateService} from 'ng2-translate/ng2-translate';
 import {Languages} from '../../utils/languages';
 import * as moment from 'moment';
+import {StorageUtils} from '../../utils/storage.utils';
 
 @Page({
     templateUrl: 'build/pages/account/account.html',
@@ -22,7 +23,7 @@ export class AccountPage {
     constructor(@Inject(TranslateService) translate: TranslateService, @Inject(IonicApp) app: IonicApp) {
         this.app = app;
         this.translate = translate;
-        this.account = new User(JSON.parse(localStorage.getItem('NFC-APP-TOKEN')));
+        this.account = new User(StorageUtils.getToken());
         this.languages = Languages.get();
     }
     changeLocale():void {

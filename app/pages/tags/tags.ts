@@ -6,6 +6,7 @@ import {Page} from 'ionic-framework/index';
 import {Inject, NgZone} from 'angular2/core';
 import {StringDatePipe} from '../../pipes/stringDatePipe';
 import {TranslatePipe, TranslateService} from 'ng2-translate/ng2-translate';
+import {StorageUtils} from '../../utils/storage.utils';
 
 @Page({
     templateUrl: 'build/pages/tags/tags.html',
@@ -19,12 +20,9 @@ export class TagsPage {
         this.getTags();
     }
     getTags():void {
-        let tagsJSON:string = localStorage.getItem('NFC-APP-TAGS');
-        if (tagsJSON) {
-            this.tags = JSON.parse(tagsJSON);
-            if(this.tags.length > 0) {
-                this.tags.forEach((tag) => tag.date = new Date(tag.date));
-            }
+        this.tags = StorageUtils.getTags();
+        if(this.tags.length > 0) {
+            this.tags.forEach((tag) => tag.date = new Date(tag.date));
         }
     }
 }

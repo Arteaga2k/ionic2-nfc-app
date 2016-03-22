@@ -13,6 +13,7 @@ import {TranslatePipe, TranslateService} from 'ng2-translate/ng2-translate';
 import {User,Profile} from '../../../app/classes/user';
 import {LoginService} from '../../../app/pages/login/login.service';
 import {Observable} from 'rxjs/Observable';
+import {StorageUtils} from '../../../app/utils/storage.utils';
 
 describe('Login page unit tests', () => {
     var form:FormBuilder;
@@ -59,15 +60,25 @@ describe('Login page unit tests', () => {
         expect(loginPage.loginForm).toEqual(credentials);
     });
 
-    it('Call login method with correct credentials', () => {
+    it('Call login method with correct credentials and remember me', () => {
 
         form.group = jasmine.createSpy('Form builder group spy').and.returnValue(credentials);
 
         let loginPage = new LoginPage( form , nav, translate,loginService);
 
-        spyOn(localStorage, 'setItem');
-        loginPage.user = new User(credentials.value);
-        loginPage.login(event);
-        expect(localStorage.setItem).toHaveBeenCalled();
+        spyOn(StorageUtils, 'setToken');
+        loginPage.login(event,credentials.value.username,credentials.value.password,true);
+        expect(StorageUtils.setToken).toHaveBeenCalled();
+    });
+
+    it('Call login method with correct credentials and without remember me', () => {
+
+        form.group = jasmine.createSpy('Form builder group spy').and.returnValue(credentials);
+
+        let loginPage = new LoginPage( form , nav, translate,loginService);
+
+        spyOn(StorageUtils, 'setToken');
+        loginPage.login(event,credentials.value.username,credentials.value.password,false);
+        expect(StorageUtils.setToken).not.toHaveBeenCalled();
     });
 });
