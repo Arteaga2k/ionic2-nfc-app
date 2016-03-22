@@ -45,7 +45,7 @@ export class LoginService {
             return this.doLogin(data.username,data.password,true);
         }
     }
-    private authenticate(username:string,password:string):Observable<Response> {
+    authenticate(username:string,password:string):Observable<Response> {
 
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');
