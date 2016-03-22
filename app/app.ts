@@ -12,11 +12,13 @@ import {QRPage} from './pages/qr/qr';
 import {AccountPage} from './pages/account/account';
 import {User} from './classes/user';
 import {TranslateService, TranslatePipe, TranslateLoader, TranslateStaticLoader} from 'ng2-translate/ng2-translate';
+import {StorageUtils} from './utils/storage.utils';
+import {LoginService} from './pages/login/login.service';
 
 @App({
   templateUrl: './build/pages/app.html',
   pipes: [TranslatePipe],
-  providers: [TranslateService,
+  providers: [TranslateService,LoginService,
     provide(TranslateLoader, {
       useFactory: (http:Http) => new TranslateStaticLoader(http,'i18n', '.json'),
       deps: [Http]
@@ -25,11 +27,9 @@ import {TranslateService, TranslatePipe, TranslateLoader, TranslateStaticLoader}
   config: {} // http://ionicframework.com/docs/v2/api/config/Config/
 })
 export class NfcApp {
-  app:IonicApp;
   rootPage:Type;
   pages:Array<any>;
-  translate:TranslateService;
-  constructor(@Inject(IonicApp) app: IonicApp, @Inject(TranslateService) translate: TranslateService,@Inject(Http) http:Http) {
+  constructor(private app: IonicApp, private translate: TranslateService, private http:Http,private loginService: LoginService) {
     this.app = app;
     this.translate = translate;
 
@@ -41,23 +41,25 @@ export class NfcApp {
       {title: 'menu.my-account', component: AccountPage, icon: 'person'}
     ];
 
-    if (this.isAuthTokenValid()) {
-      console.log('Automatically logged');
-      this.rootPage = NFCPage;
+    if (StorageUtils.hasToken()) {
+      this.loginService.doAutoLogin().subscribe(() => {
+        let nav:NavController = this.app.getComponent('nav');
+        nav.setRoot(NFCPage);
+        console.log('Redirect to Home page');
+      },() => {
+        StorageUtils.removeToken();
+        let nav:NavController = this.app.getComponent('nav');
+        nav.setRoot(LoginPage);
+      });
     } else {
       this.rootPage = LoginPage;
     }
-
-    //platform.ready().then(() => {});
   }
   setTranslateConfig(http:Http):void {
     var userLang = navigator.language.split('-')[0];
     this.app.lang = /(fr|en)/gi.test(userLang) ? userLang : 'en';
     this.translate.setDefaultLang('en');
     this.translate.use(this.app.lang);
-  }
-  isAuthTokenValid():boolean {
-    return !!localStorage.getItem('NFC-APP-TOKEN');
   }
   openPage(page:any):void {
     // navigate to the new page if it is not the current page
@@ -67,7 +69,7 @@ export class NfcApp {
     this.app.getComponent('leftMenu').close();
   }
   logout():void {
-    localStorage.removeItem('NFC-APP-TOKEN');
+    StorageUtils.removeToken();
     let nav:NavController = this.app.getComponent('nav');
     this.app.getComponent('leftMenu').enable(false);
     nav.setRoot(LoginPage);
