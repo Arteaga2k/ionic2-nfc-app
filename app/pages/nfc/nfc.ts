@@ -25,7 +25,7 @@ export class NFCPage {
     nav:NavController;
     translate:TranslateService;
     tag:Tag;
-    constructor(@Inject(NavController) nav: NavController, @Inject(Platform) platform: Platform, @Inject(NgZone) zone: NgZone, @Inject(TranslateService) translate: TranslateService) {
+    constructor(nav: NavController, platform: Platform, zone: NgZone, translate: TranslateService) {
         this.nav = nav;
         this.zone = zone;
         this.dataReceived = false;

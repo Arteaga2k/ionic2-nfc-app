@@ -30,4 +30,7 @@ export class StorageUtils {
     static setToken(token:any):void {
         localStorage.setItem(NFC_APP_TOKEN,JSON.stringify(token));
     }
+    static removeToken():void {
+        localStorage.removeItem(NFC_APP_TOKEN);
+    }
 }
