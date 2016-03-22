@@ -44,6 +44,7 @@
     "json-loader":"^0.5.4",
     "raw-loader":"0.5.1",
     "tsconfig-lint":"^0.7.0"
+
   },
   "scripts": {
     "test": "karma start",
