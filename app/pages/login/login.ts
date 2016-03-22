@@ -11,6 +11,7 @@ import {User,Profile} from '../../classes/user';
 import {TranslatePipe, TranslateService} from 'ng2-translate/ng2-translate';
 import {LoginService} from './login.service';
 import {Response} from 'angular2/http';
+import {StorageUtils} from '../../utils/storage.utils';
 
 @Page({
     templateUrl: 'build/pages/login/login.html',
@@ -55,7 +56,7 @@ export class LoginPage {
 
                 if (rememberMe) {
                     console.log('Remember me: Store user to local storage');
-                    localStorage.setItem('NFC-APP-TOKEN', JSON.stringify(user));
+                    StorageUtils.setToken(user);
                 }
             });
         }
