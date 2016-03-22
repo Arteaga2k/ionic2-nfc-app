@@ -1,3 +1,7 @@
+/// <reference path="../node_modules/angular2/typings/browser.d.ts" />
+/// <reference path="../node_modules/angular2/typings/es6-promise/es6-promise.d.ts" />
+/// <reference path="../node_modules/angular2/typings/es6-collections/es6-collections.d.ts" />
+
 import {App, IonicApp, NavController,Menu} from 'ionic-framework/index';
 import {Inject, Directive, ElementRef, Renderer, provide, Type} from 'angular2/core';
 import {Http} from 'angular2/http';
@@ -53,8 +57,7 @@ export class NfcApp {
     this.translate.use(this.app.lang);
   }
   isAuthTokenValid():boolean {
-    let user:User = new User(JSON.parse(localStorage.getItem('NFC-APP-TOKEN')));
-    return user && user.isValid();
+    return !!localStorage.getItem('NFC-APP-TOKEN');
   }
   openPage(page:any):void {
     // navigate to the new page if it is not the current page

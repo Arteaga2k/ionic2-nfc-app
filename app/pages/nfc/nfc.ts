@@ -4,12 +4,14 @@
  */
 
 ///<reference path="../../../typings/cordova/cordova.d.ts" />
+///<reference path="../../../typings/phonegap-nfc/phonegap-nfc.d.ts" />
 
 import {Page, NavController, Platform, Alert} from 'ionic-framework/index';
 import {Inject, NgZone} from 'angular2/core';
 import {TranslatePipe, TranslateService} from 'ng2-translate/ng2-translate';
 import {DOM} from 'angular2/src/platform/dom/dom_adapter';
 import {TagUtil,Tag} from '../../classes/tag';
+import {StorageUtils} from '../../utils/storage.utils';
 
 @Page({
     templateUrl: './build/pages/nfc/nfc.html',
@@ -66,17 +68,18 @@ export class NFCPage {
     saveTag():void {
         if(this.tag.id) {
             this.tag.key = btoa(this.tag.id);
-            if(!localStorage.getItem('NFC-APP-TAGS')) {
-                localStorage.setItem('NFC-APP-TAGS', JSON.stringify([]));
+
+            if(!StorageUtils.hasTags()) {
+                StorageUtils.setTags([]);
             }
 
-            let tags:Array<any> = JSON.parse(localStorage.getItem('NFC-APP-TAGS'));
+            let tags:Array<any> = StorageUtils.getTags();
             tags = tags.filter((item) => item.key !== this.tag.key);
 
             this.tag.date = new Date().toISOString();
             tags.push(this.tag);
 
-            localStorage.setItem('NFC-APP-TAGS', JSON.stringify(tags));
+            StorageUtils.setTags(tags);
 
             let alert:Alert = Alert.create({
                 title: 'Tag saved',

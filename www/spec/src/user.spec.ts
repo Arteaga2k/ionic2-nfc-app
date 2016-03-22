@@ -15,7 +15,6 @@ describe('User class unit tests', () => {
     it('Empty constructor should work',() => {
         user = new User();
         expect(user).toBeDefined();
-        expect(user.isValid()).toBeFalsy();
     });
 
     it('Constructor with object should work',() => {
@@ -26,7 +25,6 @@ describe('User class unit tests', () => {
         expect(user.password).toEqual(userObj.password);
         expect(user.role).toEqual(userObj.role);
         expect(user.lastConnection).toEqual(userObj.lastConnection);
-        expect(user.isValid()).toBeTruthy();
         expect(user.getProfile()).toBe(Profile[userObj.role]);
     });
 });
