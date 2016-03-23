@@ -1,3 +1,8 @@
+/**
+ * Login service
+ * Created by Michael DESIGAUD on 15/03/2016.
+ */
+
 import {Injectable,Inject} from 'angular2/core';
 import {Http,Headers,Response} from 'angular2/http';
 import {Observable} from 'rxjs/Observable';
@@ -7,10 +12,9 @@ import {NFCPage} from '../nfc/nfc';
 import {StorageUtils} from '../../utils/storage.utils';
 import 'rxjs/add/observable/throw';
 
-/**
- * Login service
- * Created by Michael DESIGAUD on 15/03/2016.
- */
+const CONTENT_TYPE_HEADER:string = 'Content-Type';
+const APPLICATION_JSON:string = 'application/json';
+const BACKEND_URL:string = 'http://demo2726806.mockable.io/login';
 
 @Injectable()
 export class LoginService {
@@ -22,7 +26,6 @@ export class LoginService {
                 subTitle: 'You entered invalid credentials !',
                 buttons: ['Ok']
             });
-            //this.nav.present(alert);
             return Observable.throw(alert);
         } else {
             return this.authenticate(username, password).map((loginData:any) => {
@@ -48,11 +51,11 @@ export class LoginService {
     authenticate(username:string,password:string):Observable<Response> {
 
         let headers = new Headers();
-        headers.append('Content-Type', 'application/json');
+        headers.append(CONTENT_TYPE_HEADER, APPLICATION_JSON);
 
         let data:any = {login:username,password:password};
 
-        return this.http.post('http://demo2726806.mockable.io/login',JSON.stringify(data),{headers:headers})
+        return this.http.post(BACKEND_URL,JSON.stringify(data),{headers:headers})
             .map(res => res.json());
     }
 }

@@ -5,7 +5,7 @@
 
 import {Page, NavController, Alert} from 'ionic-framework/index';
 import {Inject} from 'angular2/core';
-import {FormBuilder, Validators} from 'angular2/common';
+import {FormBuilder, Validators, ControlGroup} from 'angular2/common';
 import {NFCPage} from '../nfc/nfc';
 import {User,Profile} from '../../classes/user';
 import {TranslatePipe, TranslateService} from 'ng2-translate/ng2-translate';
@@ -19,7 +19,7 @@ import {StorageUtils} from '../../utils/storage.utils';
     pipes: [TranslatePipe]
 })
 export class LoginPage {
-    loginForm;
+    loginForm:ControlGroup;
     rememberMe = false;
     // We inject the router via DI
     constructor(form: FormBuilder, private nav: NavController, private translate: TranslateService, private loginService:LoginService) {
