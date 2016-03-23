@@ -14,11 +14,13 @@
   },
   "account":{
     "title":"My Account",
-    "profile":"Profile",
+    "profiles":"Profiles",
     "last-connection":"Last connection",
     "language":"Language",
     "french":"French",
-    "english":"English"
+    "english":"English",
+    "fullName":"Full name",
+    "email":"Email"
   },
   "menu":{
     "logout":"Logout",
