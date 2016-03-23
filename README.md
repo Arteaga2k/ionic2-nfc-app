@@ -13,6 +13,7 @@ An NFC Reader application based on ionic2 and TypeScript (ES6)
 IntelliJ v15.0.3 or later is recommended for a better TypeScript support
 
 # Features
+- JWT authentication
 - Left menu
 - Login
 - Remember me (user saved in local storage)
@@ -66,10 +67,11 @@ IntelliJ v15.0.3 or later is recommended for a better TypeScript support
         --- mocks: Cordvoa api mocks
         --- src
 - typings: TypeScript interfaces for libraries
-    -- cordvoa
+    -- cordova
     -- jasmine
     -- lodash
     -- moment
+	-- phonegap-nfc
 - platforms (not in git repository): Installed platforms (android, ios, etc..) using ```$ionic add platform``` command
 - reports (not in git repository): Unit tests reports
     -- junit (used by jenkins)
@@ -87,10 +89,11 @@ IntelliJ v15.0.3 or later is recommended for a better TypeScript support
 - ionic.config.js: Ionic configuration file
 - spec-bundle.js: Used for unit tests only with Karma, webpack and ES6
 - karma.conf.js: Karma configuration file for unit tests
-- webpack.config.test.config.js: Build configuration file used for unit tests
+- webpack.test.config.js: Build configuration file used for unit tests
 - webpack.config.js: Build configuration file
 - tsconfig.json: TypeScript configuration file
 - tslint.json: TSLint configuration file
+- typedoc.json: TypeDoc configuration file
 - package.json: For managing npm dependencies
     -- Scripts: ```$ npm test``` for executing unit tests through karma
 - config.xml: Phonegap configuration file

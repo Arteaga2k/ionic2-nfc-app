@@ -13,8 +13,10 @@
             <ion-avatar item-left>
                 <img src="img/user.png">
             </ion-avatar>
-            <h2>{{account.username}}</h2>
-            <p>{{'account.profile' | translate}}: {{account.getProfile()}}</p>
+            <h2>{{'login.username' | translate}}: {{account.username}}</h2>
+            <p>{{'account.fullName' | translate}}: {{account.getFullName()}}</p>
+            <p>{{'account.email' | translate}}: {{account.email}}</p>
+            <p>{{'account.profiles' | translate}}: {{account.getRoleList()}}</p>
         </ion-item>
 
         <ion-card-content>

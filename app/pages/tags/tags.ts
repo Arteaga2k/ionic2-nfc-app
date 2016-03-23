@@ -14,7 +14,6 @@ import {StorageUtils} from '../../utils/storage.utils';
 })
 export class TagsPage {
     tags:Array<any>;
-    translate:TranslateService;
     constructor(private translate: TranslateService) {
         this.getTags();
     }

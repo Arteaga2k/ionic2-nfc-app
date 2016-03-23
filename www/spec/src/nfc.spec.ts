@@ -3,6 +3,7 @@
  * Created by Michael DESIGAUD on 08/02/2016.
  */
 ///<reference path="../../../typings/jasmine/jasmine.d.ts" />
+///<reference path="../../../typings/jasmine/jasmine.d.ts" />
 
 import {describe, expect, it, xit, inject, injectAsync, beforeEachProviders} from 'angular2/testing';
 import {NFCPage} from '../../../app/pages/nfc/nfc';

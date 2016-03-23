@@ -4,6 +4,7 @@
  */
 
 ///<reference path="../../../typings/lodash/lodash.d.ts" />
+///<reference path="../../../typings/jasmine/jasmine.d.ts" />
 
 import * as _ from 'lodash';
 import {User,Profile} from '../../../app/classes/user';
@@ -18,13 +19,15 @@ describe('User class unit tests', () => {
     });
 
     it('Constructor with object should work',() => {
-        let userObj:any = {username:'admin',password:'admin',role:Profile.MANAGER, lastConnection:new Date().toISOString()};
+        let userObj:any = {username:'admin',password:'admin',firstName:'Michael',lastName:'Desigaud', lastConnection:new Date().toISOString(),roles:['ADMIN','MANAGER']};
         user = new User(userObj);
         expect(user).toBeDefined();
         expect(user.username).toEqual(userObj.username);
         expect(user.password).toEqual(userObj.password);
-        expect(user.role).toEqual(userObj.role);
+        expect(user.firstName).toEqual(userObj.firstName);
+        expect(user.lastName).toEqual(userObj.lastName);
+        expect(user.roles).toEqual(userObj.roles);
         expect(user.lastConnection).toEqual(userObj.lastConnection);
-        expect(user.getProfile()).toBe(Profile[userObj.role]);
+        expect(user.getRoleList()).toBe(userObj.roles.join(','));
     });
 });
