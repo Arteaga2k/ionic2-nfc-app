@@ -40,11 +40,11 @@ export class LoginService {
                 user.password = password;
 
                 console.log('Login successful', user);
-                StorageUtils.setToken(loginData.token);
 
-                if (rememberMe && loginData.token) {
-                    console.log('Remember me: Store user to local storage');
+                if (rememberMe) {
+                    console.log('Remember me: Store user and jwt to local storage');
                     StorageUtils.setAccount(user);
+                    StorageUtils.setToken(loginData.token);
                 }
 
                 return user;
