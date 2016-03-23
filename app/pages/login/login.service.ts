@@ -14,12 +14,12 @@ import 'rxjs/add/observable/throw';
 
 const CONTENT_TYPE_HEADER:string = 'Content-Type';
 const APPLICATION_JSON:string = 'application/json';
-const BACKEND_URL:string = 'http://demo2726806.mockable.io/login';
+const BACKEND_URL:string = 'http://demo2726806.mockable.io/authenticate';
 
 @Injectable()
 export class LoginService {
     constructor(private http:Http) {}
-    doLogin(username:string,password:string,rememberMe:boolean):Observable<any> {
+    login(username:string,password:string,rememberMe:boolean):Observable<any> {
         if(username.toLowerCase() !== 'admin' || password.toLowerCase() !== 'admin') {
             let alert = Alert.create({
                 title: 'Invalid credentials',
@@ -28,34 +28,41 @@ export class LoginService {
             });
             return Observable.throw(alert);
         } else {
-            return this.authenticate(username, password).map((loginData:any) => {
-                let user:User = new User(loginData);
-                user.password = password;
-                user.lastConnection = new Date();
-                console.log('Login successful', user);
 
-                if (rememberMe) {
+            let headers = new Headers();
+            headers.append(CONTENT_TYPE_HEADER, APPLICATION_JSON);
+
+            return this.http.post(BACKEND_URL,JSON.stringify({login:username,password:password}),{headers:headers}).map((res:Response) => {
+
+                let loginData:any = res.json();
+                let user:User = this.readJwt(loginData.token);
+                user.username = username;
+                user.password = password;
+
+                console.log('Login successful', user);
+                StorageUtils.setToken(loginData.token);
+
+                if (rememberMe && loginData.token) {
                     console.log('Remember me: Store user to local storage');
-                    StorageUtils.setToken(user);
+                    StorageUtils.setAccount(user);
                 }
+
+                return user;
             });
         }
     }
-    doAutoLogin():Observable<any> {
-        if(StorageUtils.hasToken()) {
-            let data:any = StorageUtils.getToken();
-            console.log('Automatically logged in with data',data);
-            return this.doLogin(data.username,data.password,true);
-        }
-    }
-    authenticate(username:string,password:string):Observable<Response> {
+    private readJwt(token:string):User {
+        let tokens:Array<any> = token.split('.');
+        let tokenPayload:any = JSON.parse(atob(tokens[1]));
 
-        let headers = new Headers();
-        headers.append(CONTENT_TYPE_HEADER, APPLICATION_JSON);
+        let user:User = new User();
+        user.lastConnection = new Date();
+        user.id = parseInt(tokenPayload.iss);
+        user.email = tokenPayload.sub;
+        user.firstName = tokenPayload.firstName;
+        user.lastName = tokenPayload.lastName;
+        user.roles = tokenPayload.role;
 
-        let data:any = {login:username,password:password};
-
-        return this.http.post(BACKEND_URL,JSON.stringify(data),{headers:headers})
-            .map(res => res.json());
+        return user;
     }
 }

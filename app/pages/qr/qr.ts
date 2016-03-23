@@ -37,8 +37,8 @@ export class QRPage {
         });
     }
     readData():void {
-        if(this.data && this.data.text){
-            if(this.data.text.indexOf('MATMSG') !== -1){
+        if(this.data && this.data.text) {
+            if(this.data.text.indexOf('MATMSG') !== -1) {
                 this.data.mail = true;
                 let url = this.data.text;
                 url = url.replace('MATMSG:TO', 'mailto');

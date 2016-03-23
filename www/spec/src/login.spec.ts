@@ -14,12 +14,14 @@ import {User,Profile} from '../../../app/classes/user';
 import {LoginService} from '../../../app/pages/login/login.service';
 import {Observable} from 'rxjs/Observable';
 import {StorageUtils} from '../../../app/utils/storage.utils';
+import {IonicApp} from 'ionic-framework/index';
 
 describe('Login page unit tests', () => {
     var form:FormBuilder;
     var nav:NavController;
     var translate:TranslateService;
     var loginService:LoginService;
+    var ionicApp:IonicApp;
     var event:any = {};
     var credentials:any = {value:{username:'admin', password:'admin', rememberMe: true}};
 
@@ -28,6 +30,7 @@ describe('Login page unit tests', () => {
         translate = jasmine.any(TranslateService);
         nav = jasmine.any(NavController);
         loginService = jasmine.any(LoginService);
+        ionicApp = jasmine.any(IonicApp);
 
 
         nav.setRoot = jasmine.createSpy('NavController set root spy').and.callFake((page:{name:String}) => {
@@ -39,10 +42,18 @@ describe('Login page unit tests', () => {
             expect(alert.data.title).toBe('Invalid credentials');
         });
 
-        loginService.doLogin = jasmine.createSpy('LoginService authenticate').and.callFake((username:string,password:string) => {
+        loginService.login = jasmine.createSpy('LoginService authenticate').and.callFake((username:string,password:string) => {
             expect(username).toBeDefined();
             expect(password).toBeDefined();
             return Observable.of({id:1,username:'admin',role:'ADMIN'});
+        });
+
+        ionicApp.getComponent = jasmine.createSpy('Ionic App getComponent').and.callFake((el:string) => {
+            expect(el).toBeDefined();
+            expect(el).toBe('leftMenu');
+            return {enable:(show:boolean) => {
+                expect(show).toBeTruthy();
+            }};
         });
 
         event.preventDefault = jasmine.createSpy('Event spy').and.returnValue(true);
@@ -52,7 +63,7 @@ describe('Login page unit tests', () => {
 
         form.group = jasmine.createSpy('Form builder group spy').and.returnValue(credentials);
 
-        let loginPage = new LoginPage( form , nav, translate,loginService);
+        let loginPage = new LoginPage( form , nav, translate,loginService,ionicApp);
 
         expect(loginPage.loginForm).toBeDefined();
         expect(form.group).toHaveBeenCalled();
@@ -63,7 +74,7 @@ describe('Login page unit tests', () => {
 
         form.group = jasmine.createSpy('Form builder group spy').and.returnValue(credentials);
 
-        let loginPage = new LoginPage( form , nav, translate,loginService);
+        let loginPage = new LoginPage( form , nav, translate,loginService,ionicApp);
 
         loginPage.login(event,credentials.value.username,credentials.value.password,true);
     });

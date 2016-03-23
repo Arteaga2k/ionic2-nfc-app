@@ -3,7 +3,7 @@
  * Created by Michael DESIGAUD on 02/02/2016.
  */
 
-import {Page, NavController, Alert} from 'ionic-framework/index';
+import {Page, NavController, Alert, IonicApp} from 'ionic-framework/index';
 import {Inject} from 'angular2/core';
 import {FormBuilder, Validators, ControlGroup} from 'angular2/common';
 import {NFCPage} from '../nfc/nfc';
@@ -22,7 +22,7 @@ export class LoginPage {
     loginForm:ControlGroup;
     rememberMe = false;
     // We inject the router via DI
-    constructor(form: FormBuilder, private nav: NavController, private translate: TranslateService, private loginService:LoginService) {
+    constructor(form: FormBuilder, private nav: NavController, private translate: TranslateService, private loginService:LoginService,private app: IonicApp) {
         this.loginForm = form.group({
             username: ['', Validators.required],
             password: ['', Validators.required],
@@ -33,7 +33,8 @@ export class LoginPage {
         // This will be called when the user clicks on the Login button
         event.preventDefault();
 
-        this.loginService.doLogin(username,password,rememberMe).subscribe(() => {
+        this.loginService.login(username,password,rememberMe).subscribe(() => {
+            this.app.getComponent('leftMenu').enable(true);
             this.nav.setRoot(NFCPage);
         },(alert:Alert) => {
            this.nav.present(alert);

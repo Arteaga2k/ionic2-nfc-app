@@ -4,7 +4,7 @@
 
 import {App, IonicApp, NavController,Menu} from 'ionic-framework/index';
 import {Inject, Directive, ElementRef, Renderer, provide, Type} from 'angular2/core';
-import {Http} from 'angular2/http';
+import {Http,RequestOptions, XHRBackend} from 'angular2/http';
 import {NFCPage} from './pages/nfc/nfc';
 import {LoginPage} from './pages/login/login';
 import {TagsPage} from './pages/tags/tags';
@@ -14,6 +14,7 @@ import {User} from './classes/user';
 import {TranslateService, TranslatePipe, TranslateLoader, TranslateStaticLoader} from 'ng2-translate/ng2-translate';
 import {StorageUtils} from './utils/storage.utils';
 import {LoginService} from './pages/login/login.service';
+import {JwtHttp} from './utils/jwt-http';
 
 @App({
   templateUrl: './build/pages/app.html',
@@ -22,6 +23,13 @@ import {LoginService} from './pages/login/login.service';
     provide(TranslateLoader, {
       useFactory: (http:Http) => new TranslateStaticLoader(http,'i18n', '.json'),
       deps: [Http]
+    }),
+    provide(Http,{
+      useFactory:(xhrBackend: XHRBackend, requestOptions: RequestOptions) => {
+        return new JwtHttp(xhrBackend, requestOptions);
+      },
+      deps: [XHRBackend, RequestOptions],
+      multi:false
     })
   ],
   config: {} // http://ionicframework.com/docs/v2/api/config/Config/
@@ -29,11 +37,11 @@ import {LoginService} from './pages/login/login.service';
 export class NfcApp {
   rootPage:Type;
   pages:Array<any>;
-  constructor(private app: IonicApp, private translate: TranslateService, private http:Http,private loginService: LoginService) {
+  constructor(private app: IonicApp, private translate: TranslateService, private loginService: LoginService) {
     this.app = app;
     this.translate = translate;
 
-    this.setTranslateConfig(http);
+    this.setTranslateConfig();
 
     this.pages = [
       {title: 'menu.read-tag', component: NFCPage, icon: 'card'},
@@ -41,21 +49,13 @@ export class NfcApp {
       {title: 'menu.my-account', component: AccountPage, icon: 'person'}
     ];
 
-    if (StorageUtils.hasToken()) {
-      this.loginService.doAutoLogin().subscribe(() => {
-        let nav:NavController = this.app.getComponent('nav');
-        nav.setRoot(NFCPage);
-        console.log('Redirect to Home page');
-      },() => {
-        StorageUtils.removeToken();
-        let nav:NavController = this.app.getComponent('nav');
-        nav.setRoot(LoginPage);
-      });
+    if (StorageUtils.hasAccount()) {
+      this.rootPage = NFCPage;
     } else {
       this.rootPage = LoginPage;
     }
   }
-  setTranslateConfig(http:Http):void {
+  setTranslateConfig():void {
     var userLang = navigator.language.split('-')[0];
     this.app.lang = /(fr|en)/gi.test(userLang) ? userLang : 'en';
     this.translate.setDefaultLang('en');
@@ -70,6 +70,7 @@ export class NfcApp {
   }
   logout():void {
     StorageUtils.removeToken();
+    StorageUtils.removeAccount();
     let nav:NavController = this.app.getComponent('nav');
     this.app.getComponent('leftMenu').enable(false);
     nav.setRoot(LoginPage);

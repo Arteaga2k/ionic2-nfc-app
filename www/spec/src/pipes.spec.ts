@@ -1,3 +1,5 @@
+///<reference path="../../../typings/jasmine/jasmine.d.ts" />
+
 /**
  * Pipes unit tests
  * Created by Michael DESIGAUD on 10/02/2016.

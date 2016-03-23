@@ -23,7 +23,7 @@ export class AccountPage {
     constructor(@Inject(TranslateService) translate: TranslateService, @Inject(IonicApp) app: IonicApp) {
         this.app = app;
         this.translate = translate;
-        this.account = new User(StorageUtils.getToken());
+        this.account = new User(StorageUtils.getAccount());
         this.languages = Languages.get();
     }
     changeLocale():void {
