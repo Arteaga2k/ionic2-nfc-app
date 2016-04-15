@@ -1,11 +1,12 @@
 node_modules/
 www/build/
 platforms/
-/plugins
+plugins/
 .idea/
 reports/
 coverage/
 doc/
+typings/
 *.iml
 app/**/*.js
 app/**/*.js.map
