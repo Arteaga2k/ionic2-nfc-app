@@ -4,7 +4,7 @@
  */
 ///<reference path="../../../typings/jasmine/jasmine.d.ts" />
 
-import {describe, expect, it, xit, inject, beforeEachProviders} from 'angular2/testing';
+import {describe, expect, it, xit, inject, beforeEachProviders,injectAsync,TestComponentBuilder,ComponentFixture} from 'angular2/testing';
 import {LoginPage} from '../../../app/pages/login/login';
 import {NFCPage} from '../../../app/pages/nfc/nfc';
 import {FormBuilder, Validators} from 'angular2/common';
@@ -15,6 +15,7 @@ import {LoginService} from '../../../app/pages/login/login.service';
 import {Observable} from 'rxjs/Observable';
 import {StorageUtils} from '../../../app/utils/storage.utils';
 import {IonicApp} from 'ionic-framework/index';
+import {Component} from 'angular2/core';
 
 describe('Login page unit tests', () => {
     var form:FormBuilder;
@@ -24,6 +25,8 @@ describe('Login page unit tests', () => {
     var ionicApp:IonicApp;
     var event:any = {};
     var credentials:any = {value:{username:'admin', password:'admin', rememberMe: true}};
+
+    beforeEachProviders(() => [TestComponentBuilder]);
 
     beforeEach(() => {
         form = jasmine.any(FormBuilder);
@@ -59,6 +62,14 @@ describe('Login page unit tests', () => {
         event.preventDefault = jasmine.createSpy('Event spy').and.returnValue(true);
     });
 
+    beforeEach(injectAsync([TestComponentBuilder], tcb => {
+        return tcb
+            .createAsync(Container)
+            .then((f:ComponentFixture) => {
+                console.log(f);
+            });
+    }));
+
     it('Login instance', () => {
 
         form.group = jasmine.createSpy('Form builder group spy').and.returnValue(credentials);
@@ -79,3 +90,12 @@ describe('Login page unit tests', () => {
         loginPage.login(event,credentials.value.username,credentials.value.password,true);
     });
 });
+
+@Component({
+    selector: 'container',
+    template: `<login-page></login-page>`,
+    directives: [LoginPage]
+})
+export class Container {
+
+}

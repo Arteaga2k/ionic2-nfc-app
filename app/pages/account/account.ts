@@ -2,8 +2,8 @@
  * Account page
  * Created by Michael DESIGAUD on 10/02/2016.
  */
-import {Page, IonicApp} from 'ionic-framework/index';
-import {Inject} from 'angular2/core';
+import {Page, IonicApp} from 'ionic-angular';
+import {Inject} from '@angular/core';
 import {FromNowPipe} from '../../pipes/fromNowPipe';
 import {User} from '../../classes/user';
 import {TranslatePipe, TranslateService} from 'ng2-translate/ng2-translate';

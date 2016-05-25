@@ -5,8 +5,8 @@
 
 ///<reference path="../../typings/moment/moment.d.ts" />
 
-import {Pipe, PipeTransform} from 'angular2/core';
-import {DatePipe} from 'angular2/common';
+import {Pipe, PipeTransform} from '@angular/core';
+import {DatePipe} from '@angular/common';
 import {StringDatePipe} from './stringDatePipe';
 import * as moment from 'moment';
 

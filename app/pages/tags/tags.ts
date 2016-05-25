@@ -2,8 +2,8 @@
  * Tags page
  * Created by Michael DESIGAUD on 04/02/2016.
  */
-import {Page} from 'ionic-framework/index';
-import {Inject, NgZone} from 'angular2/core';
+import {Page} from 'ionic-angular';
+import {Inject, NgZone} from '@angular/core';
 import {StringDatePipe} from '../../pipes/stringDatePipe';
 import {TranslatePipe, TranslateService} from 'ng2-translate/ng2-translate';
 import {StorageUtils} from '../../utils/storage.utils';

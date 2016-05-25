@@ -6,10 +6,9 @@
 ///<reference path="../../../typings/cordova/cordova.d.ts" />
 ///<reference path="../../../typings/phonegap-nfc/phonegap-nfc.d.ts" />
 
-import {Page, NavController, Platform, Alert} from 'ionic-framework/index';
-import {Inject, NgZone} from 'angular2/core';
+import {Page, NavController, Platform, Alert} from 'ionic-angular';
+import {Inject, NgZone} from '@angular/core';
 import {TranslatePipe, TranslateService} from 'ng2-translate/ng2-translate';
-import {DOM} from 'angular2/src/platform/dom/dom_adapter';
 import {TagUtil,Tag} from '../../classes/tag';
 import {StorageUtils} from '../../utils/storage.utils';
 
@@ -40,12 +39,8 @@ export class NFCPage {
         });
     }
     addNfcListeners():void {
-        nfc.addTagDiscoveredListener((tagEvent:Event) => {
-            this.tagListenerSuccess(tagEvent);
-        });
-        nfc.addNdefListener((tagEvent:Event) => {
-            this.tagListenerSuccess(tagEvent);
-        });
+        nfc.addTagDiscoveredListener((tagEvent:Event) => this.tagListenerSuccess(tagEvent));
+        nfc.addNdefListener((tagEvent:Event) => this.tagListenerSuccess(tagEvent));
     }
     tagListenerSuccess(tagEvent:Event) {
         console.log(tagEvent);

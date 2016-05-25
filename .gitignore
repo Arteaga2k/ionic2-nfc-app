@@ -13,3 +13,4 @@ app/**/*.js.map
 www/spec/**/*.js
 www/spec/**/*.js.map
 npm-debug.log
+ionic.config.js

@@ -1,10 +1,6 @@
-/// <reference path="../node_modules/angular2/typings/browser.d.ts" />
-/// <reference path="../node_modules/angular2/typings/es6-promise/es6-promise.d.ts" />
-/// <reference path="../node_modules/angular2/typings/es6-collections/es6-collections.d.ts" />
-
-import {App, IonicApp, NavController,Menu} from 'ionic-framework/index';
-import {Inject, Directive, ElementRef, Renderer, provide, Type} from 'angular2/core';
-import {Http,RequestOptions, XHRBackend} from 'angular2/http';
+import {App, IonicApp, NavController,Menu} from 'ionic-angular';
+import {Inject, Directive, ElementRef, Renderer, provide, Type} from '@angular/core';
+import {Http,RequestOptions, XHRBackend} from '@angular/http';
 import {NFCPage} from './pages/nfc/nfc';
 import {LoginPage} from './pages/login/login';
 import {TagsPage} from './pages/tags/tags';

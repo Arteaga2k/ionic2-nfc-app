@@ -3,7 +3,7 @@
  * Created by Michael DESIGAUD on 23/03/2016.
  */
 
-import {Http,Response,RequestOptionsArgs,RequestOptions, ConnectionBackend} from 'angular2/http';
+import {Http,Response,RequestOptionsArgs,RequestOptions, ConnectionBackend} from '@angular/http';
 import {Observable} from 'rxjs/Observable';
 import {StorageUtils} from './storage.utils';
 

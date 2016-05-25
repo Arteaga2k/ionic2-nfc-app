@@ -3,14 +3,13 @@
  * Created by Michael DESIGAUD on 15/03/2016.
  */
 
-import {Injectable,Inject} from 'angular2/core';
-import {Http,Headers,Response} from 'angular2/http';
+import {Injectable,Inject} from '@angular/core';
+import {Http,Headers,Response} from '@angular/http';
 import {Observable} from 'rxjs/Observable';
-import {NavController, Alert} from 'ionic-framework/index';
+import {NavController, Alert} from 'ionic-angular';
 import {User} from '../../classes/user';
 import {NFCPage} from '../nfc/nfc';
 import {StorageUtils} from '../../utils/storage.utils';
-import 'rxjs/add/observable/throw';
 
 const CONTENT_TYPE_HEADER:string = 'Content-Type';
 const APPLICATION_JSON:string = 'application/json';

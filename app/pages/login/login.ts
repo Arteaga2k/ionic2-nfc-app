@@ -3,17 +3,18 @@
  * Created by Michael DESIGAUD on 02/02/2016.
  */
 
-import {Page, NavController, Alert, IonicApp} from 'ionic-framework/index';
-import {Inject} from 'angular2/core';
-import {FormBuilder, Validators, ControlGroup} from 'angular2/common';
+import {Page, NavController, Alert, IonicApp} from 'ionic-angular';
+import {Inject} from '@angular/core';
+import {FormBuilder, Validators, ControlGroup} from '@angular/common';
 import {NFCPage} from '../nfc/nfc';
 import {User,Profile} from '../../classes/user';
 import {TranslatePipe, TranslateService} from 'ng2-translate/ng2-translate';
 import {LoginService} from './login.service';
-import {Response} from 'angular2/http';
+import {Response} from '@angular/http';
 import {StorageUtils} from '../../utils/storage.utils';
 
 @Page({
+    selector:'login-page',
     templateUrl: 'build/pages/login/login.html',
     providers:[LoginService],
     pipes: [TranslatePipe]
