@@ -1,5 +1,5 @@
-import {App, IonicApp, NavController,Menu} from 'ionic-angular';
-import {Inject, Directive, ElementRef, Renderer, provide, Type} from '@angular/core';
+import {App, IonicApp, NavController,Menu,Nav} from 'ionic-angular';
+import {Inject, Directive, ElementRef, Renderer, provide, Type,ViewChild} from '@angular/core';
 import {Http,RequestOptions, XHRBackend} from '@angular/http';
 import {NFCPage} from './pages/nfc/nfc';
 import {LoginPage} from './pages/login/login';
@@ -33,6 +33,8 @@ import {JwtHttp} from './utils/jwt-http';
 export class NfcApp {
   rootPage:Type;
   pages:Array<any>;
+  @ViewChild(Nav) nav:Nav;
+  @ViewChild(Menu) menu:Menu;
   constructor(private app: IonicApp, private translate: TranslateService, private loginService: LoginService) {
     this.app = app;
     this.translate = translate;
@@ -59,16 +61,14 @@ export class NfcApp {
   }
   openPage(page:any):void {
     // navigate to the new page if it is not the current page
-    this.app.getComponent('leftMenu').enable(true);
-    let nav:NavController = this.app.getComponent('nav');
-    nav.setRoot(page.component);
-    this.app.getComponent('leftMenu').close();
+    this.menu.enable(true);
+    this.nav.setRoot(page.component);
+    this.menu.close();
   }
   logout():void {
     StorageUtils.removeToken();
     StorageUtils.removeAccount();
-    let nav:NavController = this.app.getComponent('nav');
-    this.app.getComponent('leftMenu').enable(false);
-    nav.setRoot(LoginPage);
+    this.menu.enable(false);
+    this.nav.setRoot(LoginPage);
   }
 }

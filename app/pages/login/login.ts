@@ -15,7 +15,7 @@ import {StorageUtils} from '../../utils/storage.utils';
 
 @Page({
     selector:'login-page',
-    templateUrl: 'build/pages/login/login.html',
+    template: 'build/pages/login/login.html',
     providers:[LoginService],
     pipes: [TranslatePipe]
 })
@@ -33,12 +33,6 @@ export class LoginPage {
     login(event:Event,username:string,password:string,rememberMe:boolean):void {
         // This will be called when the user clicks on the Login button
         event.preventDefault();
-
-        this.loginService.login(username,password,rememberMe).subscribe(() => {
-            this.app.getComponent('leftMenu').enable(true);
-            this.nav.setRoot(NFCPage);
-        },(alert:Alert) => {
-           this.nav.present(alert);
-        });
+        this.loginService.login(username,password,rememberMe).subscribe(() => this.nav.setRoot(NFCPage),(alert:Alert) => this.nav.present(alert));
     }
 }

@@ -5,10 +5,10 @@
 ///<reference path="../../../typings/jasmine/jasmine.d.ts" />
 ///<reference path="../../../typings/jasmine/jasmine.d.ts" />
 
-import {describe, expect, it, xit, inject, injectAsync, beforeEachProviders} from 'angular2/testing';
+import {describe, expect, it, xit, inject, injectAsync, beforeEachProviders} from '@angular/core/testing';
 import {NFCPage} from '../../../app/pages/nfc/nfc';
-import {NavController, Alert, Platform} from 'ionic-framework/index';
-import {NgZone} from 'angular2/core';
+import {NavController, Alert, Platform} from 'ionic-angular';
+import {NgZone} from '@angular/core';
 import {CordovaMock} from '../mocks/cordova.mock';
 import {TranslateService} from 'ng2-translate/ng2-translate';
 

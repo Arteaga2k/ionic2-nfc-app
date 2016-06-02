@@ -17,12 +17,8 @@ import {StorageUtils} from '../../utils/storage.utils';
 })
 export class AccountPage {
     account:User;
-    translate:TranslateService;
-    app:IonicApp;
     languages:Languages;
-    constructor(@Inject(TranslateService) translate: TranslateService, @Inject(IonicApp) app: IonicApp) {
-        this.app = app;
-        this.translate = translate;
+    constructor(private translate: TranslateService, private app: IonicApp) {
         this.account = new User(StorageUtils.getAccount());
         this.languages = Languages.get();
     }

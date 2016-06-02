@@ -30,7 +30,8 @@ module.exports = {
                 test: /\.js$/,
                 loader: "source-map-loader",
                 exclude: [
-                    root('node_modules/rxjs')
+                    root('node_modules/rxjs'),
+                    root('node_modules/@angular')
                 ]
             }
         ],

@@ -26,7 +26,7 @@ module.exports = {
       },
       {
         test: /\.js$/,
-        include: path.resolve('node_modules/angular2'),
+        include: path.resolve('node_modules/@angular'),
         loader: 'strip-sourcemap'
       }
     ],
