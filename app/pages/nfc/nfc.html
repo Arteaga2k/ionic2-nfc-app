@@ -30,7 +30,7 @@
         <ion-item>
             <p>{{'codes.tags.id' | translate}} : {{tag.id}}</p>
             <p>{{'codes.tags.type' | translate}} : <ion-badge royal>{{tag.type}}</ion-badge></p>
-            <p *ngFor="#techType of tag.techTypes">
+            <p *ngFor="let techType of tag.techTypes">
                 <span>{{'codes.tags.techTypes' | translate}} : {{techType}}</span>
             </p>
             <p>{{'codes.tags.maxSize' | translate}}  : {{tag.maxSize}}</p>
@@ -44,7 +44,7 @@
            <ion-checkbox royal disabled [(ngModel)]="tag.isWritable"></ion-checkbox>
        </ion-item>
     </ion-list>
-    <ion-list *ngFor="#record of tag.records;#i = index" [hidden]="!dataReceived">
+    <ion-list *ngFor="let record of tag.records;let i = index" [hidden]="!dataReceived">
         <ion-list-header>{{'codes.tags.record' | translate}} {{i+1}} ({{'codes.tags.type' | translate}}: {{record.getFormattedType()}})</ion-list-header>
         <ion-item>{{record.getFormattedPayload()}}</ion-item>
     </ion-list>

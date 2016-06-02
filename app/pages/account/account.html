@@ -24,7 +24,7 @@
                 <ion-item>
                     <ion-label>{{'account.language' | translate}}</ion-label>
                     <ion-select [(ngModel)]="app.lang" (change)="changeLocale()">
-                        <ion-option *ngFor='#language of languages' value="{{language.code}}">{{language.translateKey | translate}}</ion-option>
+                        <ion-option *ngFor='let language of languages' value="{{language.code}}">{{language.translateKey | translate}}</ion-option>
                     </ion-select>
                 </ion-item>
             </ion-list>
