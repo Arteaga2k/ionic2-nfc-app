@@ -106,10 +106,6 @@ Install the node dependencies:
 ```bash
 $ npm install
 ```
-You need to install tsd (Type Script Definition Manager) required by zonejs in administrator mode:
-```bash
-$ npm install -g tsd
-```
 You need to install the ionic command in version 2:
 ```bash
 $ npm install -g ionic@beta
@@ -126,19 +122,14 @@ $ npm install -g cordova
 # Typings
 To search for typings :
 ```bash
-$ tsd query jasmine
+$ typings search jasmine
 ```
 
 To add a typing :
 ```bash
-$ tsd install jasmine
+$ typings install jasmine --save --ambient
 ```
 Files will be added to the typings folder. 
-
-To use a typing in a TypeScript file, add:
-```bash
-$ ///<reference path="pathTo/typings/jasmine/jasmine.d.ts" />
-$ ///<reference path="pathTo/typings/cordova/cordova.d.ts" />
 ```
 
 # Execution on desktop
