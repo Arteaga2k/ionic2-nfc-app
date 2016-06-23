@@ -1,4 +1,4 @@
-import {App, IonicApp, NavController,Menu,Nav} from 'ionic-angular';
+import {App, IonicApp, NavController,Menu,Nav,NavParams} from 'ionic-angular';
 import {Inject, Directive, ElementRef, Renderer, provide, Type,ViewChild} from '@angular/core';
 import {Http,RequestOptions, XHRBackend} from '@angular/http';
 import {NFCPage} from './pages/nfc/nfc';
