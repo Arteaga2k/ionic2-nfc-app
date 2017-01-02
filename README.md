@@ -1,4 +1,4 @@
-CROSS PLATFORM NFC [![Build Status](https://travis-ci.org/RedFroggy/ionic2-nfc-app.svg?branch=master)](https://travis-ci.org/RedFroggy/ionic2-nfc-app)
+[OUTDATED] CROSS PLATFORM NFC [![Build Status](https://travis-ci.org/RedFroggy/ionic2-nfc-app.svg?branch=master)](https://travis-ci.org/RedFroggy/ionic2-nfc-app)
 ==========
 
 # Presentation
